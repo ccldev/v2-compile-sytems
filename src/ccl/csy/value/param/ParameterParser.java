@@ -38,7 +38,6 @@ public class ParameterParser {
 				if(layer <= -1) throw new RuntimeException("Negative layer " + layer);
 				break;
 			case ',':
-				System.out.println(layer);
 				if(layer == 0){
 					String str = temp.toString();
 					list.add(str.substring(0, str.length() - 1).trim());
