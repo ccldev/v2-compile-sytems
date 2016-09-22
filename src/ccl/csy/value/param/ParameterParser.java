@@ -58,7 +58,7 @@ public class ParameterParser {
 
 	private static String buildParamValueList(int size) {
 		StringBuilder builder = new StringBuilder();
-		String cfg = size == 1 ? ":#" : ":~";
+		String cfg = ":#";
 		for(int i = 0; i < size; i++){
 			builder.append(cfg);
 		}
