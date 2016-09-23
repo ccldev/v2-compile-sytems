@@ -52,24 +52,16 @@ public class ParameterParser {
 			list.add(str.trim());
 		}
 		
-		return new ParameterParseResult(compileParsed(list), buildParamValueList(list.size()));
-	}
-
-	private static String buildParamValueList(int size) {
-		StringBuilder builder = new StringBuilder();
-		String cfg = ":#";
-		for(int i = 0; i < size; i++){
-			builder.append(cfg);
-		}
-		return builder.toString();
+		return new ParameterParseResult(compileParsed(list), list.size() + "");
 	}
 
 	private static String compileParsed(List<String> list) {
 		StringBuilder builder = new StringBuilder();
-		for(int i = list.size() - 1; i >= 0; i--){
+		for(int i = 0; i < list.size(); i++){
 			ValueCompiler compiler = new ValueCompiler(list.get(i));
 			compiler.act();
 			builder.append(compiler.get());
+			builder.append("\nS");
 			builder.append("\n");
 		}
 		return builder.toString();

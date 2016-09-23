@@ -50,7 +50,7 @@ public class CCLInvoke extends TodoInfo{
 	@Override
 	public String getBase() {
 		ParameterParseResult res = ParameterParser.compile(paramBuilder.toString());
-		return res.getBefore() + "\n(:~" + res.getBase();
+		return res.getBefore() + "\n;:invoke " + res.getBase();
 	}
 
 	@Override
