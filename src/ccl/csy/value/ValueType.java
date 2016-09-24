@@ -2,7 +2,8 @@ package ccl.csy.value;
 
 public enum ValueType {
 	
-	NATIVE("N"), ARRAY("A"), STRING("S"), NUMBER("F"), VARIABLE("");
+	NATIVE("N"), ARRAY("A"), STRING("S"),
+	NUMBER("F"), VARIABLE(""), FUNCTION("M");
 	
 	private String code;
 

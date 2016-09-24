@@ -19,6 +19,7 @@ public class ValueCompiler {
 		case '(': type = ValueType.NATIVE; break;
 		case '[': type = ValueType.ARRAY; break;
 		case '"': type = ValueType.STRING; break;
+		case '@': type = ValueType.FUNCTION; break;
 		}
 		if(Character.isDigit(start)) type = ValueType.NUMBER;
 		else if(type == null) type = ValueType.VARIABLE;
