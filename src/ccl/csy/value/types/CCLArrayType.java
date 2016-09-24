@@ -11,6 +11,7 @@ public class CCLArrayType extends ValueParser{
 	
 	@Override
 	public void feed(String val) {
+		list.clear();
 		val = val.trim();
 		val = val.substring(1, val.length() - 1);
 		boolean inString = false;
