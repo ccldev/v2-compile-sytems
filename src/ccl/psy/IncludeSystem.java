@@ -2,6 +2,8 @@ package ccl.psy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +14,8 @@ public class IncludeSystem implements CompileSystem{
 
 	private static final Pattern INCLUDE_PATTERN = Pattern.compile
 			("include\\s*(.+)", Pattern.DOTALL);
+	
+	private List<File> included = new ArrayList<File>();
 	
 	@Override
 	public boolean accept(String snippet) {
@@ -26,10 +30,11 @@ public class IncludeSystem implements CompileSystem{
 			return readContent(new File(m.group(1)));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Unable to load file content!", e);
-		}		
+		}
 	}
 
 	private String readContent(File file) throws FileNotFoundException {
+		if(included.contains(file)) return "";
 		Scanner s = new Scanner(file);
 		StringBuilder builder = new StringBuilder();
 		while(s.hasNextLine()){
@@ -37,6 +42,7 @@ public class IncludeSystem implements CompileSystem{
 			builder.append("\n");
 		}
 		s.close();
+		included.add(file);
 		return builder.toString();
 	}
 
