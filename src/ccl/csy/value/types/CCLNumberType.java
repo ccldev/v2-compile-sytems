@@ -8,9 +8,9 @@ import ccl.csy.value.ValueParser;
 public class CCLNumberType extends ValueParser{
 
 	private Pattern INT_PATTERN = Pattern.compile
-			("\\s*([0-9]*)\\s*(.*)", Pattern.DOTALL);
+			("\\s*-?([0-9]*)\\s*(.*)", Pattern.DOTALL);
 	private Pattern FLOAT_PATTERN = Pattern.compile
-			("\\s*([0-9]*\\.[0-9])\\s*(.*)", Pattern.DOTALL);
+			("\\s*-?([0-9]*\\.[0-9])\\s*(.*)", Pattern.DOTALL);
 	
 	private Matcher matcher;
 	

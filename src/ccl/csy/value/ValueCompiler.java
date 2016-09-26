@@ -21,7 +21,7 @@ public class ValueCompiler {
 		case '"': type = ValueType.STRING; break;
 		case '@': type = ValueType.FUNCTION; break;
 		}
-		if(Character.isDigit(start)) type = ValueType.NUMBER;
+		if(Character.isDigit(start) || start == '-') type = ValueType.NUMBER;
 		else if(type == null) type = ValueType.VARIABLE;
 		
 		ValueParser parser = ValueParser.get(type);
