@@ -14,7 +14,7 @@ public class WhileBlock extends BlockSurround{
 	}
 	
 	@Override
-	public String getBefore(String keyword, String condition) {
+	public String getBefore(String keyword, String condition, String identifier) {
 		ValueCompiler vc = new ValueCompiler(condition);
 		vc.act();
 		return "#:while_skip" + i + ":goto\n" + 
@@ -22,7 +22,7 @@ public class WhileBlock extends BlockSurround{
 	}
 
 	@Override
-	public String getAfter(String keyword, String condition) {
+	public String getAfter(String keyword, String condition, String identifier) {
 		ValueCompiler vc = new ValueCompiler(condition);
 		vc.act();
 		return "}\n#:while_skip" + i + ":mark\n" + vc.get() + "\n?:~" + 
