@@ -35,22 +35,22 @@ public class CCLArrayType extends ValueParser{
 			switch(c){
 			case '"':
 				inString = true; break;
-			case '(':
+			case '[':
 				layer++; break;
-			case ')':
+			case ']':
 				layer--;
 				if(layer <= -1) throw new RuntimeException("Negative layer " + layer);
 				break;
 			case ',':
 				if(layer == 0){
-					String str = temp.toString();
+					String str = temp.toString().trim();
 					list.add(str.substring(0, str.length() - 1).trim());
 					temp = new StringBuilder();
 				}
 				break;
 			}
 		}
-		String str = temp.toString();
+		String str = temp.toString().trim();
 		if(!str.isEmpty()){
 			list.add(str.trim());
 		}
