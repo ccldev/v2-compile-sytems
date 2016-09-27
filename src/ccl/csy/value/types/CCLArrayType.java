@@ -21,7 +21,7 @@ public class CCLArrayType extends ValueParser{
 		StringBuilder temp = new StringBuilder();
 		int i;
 		loop:
-		for(i = 1; i < val.length(); i++){
+		for(i = 0; i < val.length(); i++){
 			char c = val.charAt(i);
 			temp.append(c);
 			if(unescape){

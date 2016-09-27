@@ -2,7 +2,7 @@ package ccl.csy.value.todo;
 
 public enum TodoType {
 	
-	GET, INVOKE, REFLECT;
+	GET, INVOKE;
 	
 	private String code;
 
@@ -14,7 +14,6 @@ public enum TodoType {
 		switch(c){
 		case '.': return GET;
 		case '(': return INVOKE;
-		case '[': return REFLECT;
 		default: throw new RuntimeException("Unexpected todo identifier " + c);
 		}
 	}
