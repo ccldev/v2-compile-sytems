@@ -12,6 +12,7 @@ public class TodoCustomCompiler implements RawValueCompiler {
 	@Override
 	public String compileRawValue(String val) throws ImplementationException,
 			DebugException {
+		if(val.trim().isEmpty()) return "";
 		String op = "";
 		for(int i = 0; i < val.length(); i++){
 			char c = val.charAt(i);

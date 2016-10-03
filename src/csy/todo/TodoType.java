@@ -48,6 +48,7 @@ public enum TodoType {
 		char start = raw.charAt(0);
 		for(int i = 0; i < values().length; i++){
 			TodoType t = values()[i];
+			if(t == CUSTOM) continue;
 			if(t.matches(start)) return t;
 		}
 		return CUSTOM;

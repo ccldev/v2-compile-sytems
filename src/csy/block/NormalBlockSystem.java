@@ -2,6 +2,7 @@ package csy.block;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import ccl.v2_1.cat.CclCodeBlock;
 import ccl.v2_1.code.CclCodePart;
@@ -19,7 +20,7 @@ public class NormalBlockSystem implements CompileSystem<CclCodeBlock, File>{
 
 	@Override
 	public String compileComplete(CclCodeBlock infos)
-			throws ImplementationException, DebugException {
+			throws ImplementationException, DebugException, IOException {
 		try {
 			return "{\n" + CclCodePart.compileAll(infos.getCodePart().buildCodeParts(1)) + "\n}";
 		} catch (FileNotFoundException e) {

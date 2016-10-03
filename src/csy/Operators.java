@@ -16,4 +16,8 @@ public class Operators {
 		return res;
 	}
 	
+	public static void add(String op, String func){
+		map.put(op, func);
+	}
+	
 }
