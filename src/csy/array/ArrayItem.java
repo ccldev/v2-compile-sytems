@@ -40,12 +40,13 @@ public class ArrayItem {
 		
 		builder.append("D\nG:~:push\n");
 		builder.append(StaticValueCompiler.compileValue(value));
-		builder.append("\nS\n;:invoke 1\nP");
 		if(!name.isEmpty()){
-			throw new NI("Named item!");
+			builder.append("\nS\nG:S" + name);
+			builder.append("\nS\n;:invoke 2\nP");
 		}else{
-			return builder.toString();
+			builder.append("\nS\n;:invoke 1\nP");
 		}
+		return builder.toString();
 	}
 
 	private void analyze() {

@@ -14,7 +14,7 @@ import ccl.v2_1.sys.CompileSystem;
 public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{
 
 	private static final Pattern SET_PATTERN = Pattern.compile
-			("\\s*([a-zA-Z0-9_]*)\\s*=\\s*(.+)\\s*;\\s*");
+			("\\s*([a-zA-Z0-9_]*)\\s*=\\s*(.+)\\s*;\\s*", Pattern.DOTALL);
 	
 	@Override
 	public boolean accept(CclCodeSnippet infos) {

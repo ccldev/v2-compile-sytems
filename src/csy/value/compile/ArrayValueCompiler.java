@@ -14,7 +14,14 @@ public class ArrayValueCompiler implements RawValueCompiler{
 		StringBuilder builder = new StringBuilder("G:A0\n");
 		
 		val = val.trim();
-		ParameterList items = new ParameterList(val.substring(1, val.length() - 1));
+		val = val.substring(1, val.length() - 1);
+		val = val.trim();
+		
+		if(val.isEmpty()){
+			return builder.toString();
+		}
+		
+		ParameterList items = new ParameterList(val);
 		for(int i = 0; i < items.count(); i++){
 			ArrayItem item = new ArrayItem(i, items.get(i));
 			builder.append(item.compile());
