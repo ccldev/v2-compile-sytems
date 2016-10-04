@@ -69,7 +69,7 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		builder.append(name);
 		builder.append("=parameters.get(");
 		builder.append(index);
-		builder.append(").getValue();");
+		builder.append(");");
 		
 		builder.append("}");
 		
