@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -74,15 +75,35 @@ public class CCL {
 
 	private static String preProcess(String fileContent) throws DebugException, ImplementationException, IOException {
 		PreProcessor processor = new PreProcessor();
-		Scanner s = new Scanner(fileContent);
+		
+		String completeCode = readContent(get("/res/header.cl2")) + "\n" + 
+								fileContent + "\n" + 
+								readContent(get("/res/finisher.cl2"));
+		
+		Scanner s = new Scanner(completeCode);
 		while(s.hasNextLine()){
 			processor.process(s.nextLine());
 		}
 		return processor.get();
 	}
 
+	private static InputStream get(String res) {
+		return CCL.class.getResourceAsStream(res);
+	}
+
 	private static String readFileContent(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
+		StringBuilder builder = new StringBuilder();
+		while(s.hasNextLine()){
+			builder.append(s.nextLine());
+			builder.append("\n");
+		}
+		s.close();
+		return builder.toString();
+	}
+	
+	private static String readContent(InputStream stream){
+		Scanner s = new Scanner(stream);
 		StringBuilder builder = new StringBuilder();
 		while(s.hasNextLine()){
 			builder.append(s.nextLine());
