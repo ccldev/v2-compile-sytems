@@ -9,7 +9,7 @@ public enum ValueType {
 	
 	NATIVE('(', ')'),
 	ARRAY('[', ']'),
-	NUMBER("[0-9]", "[0-9]+"),
+	NUMBER("\\d", "\\d+"),
 	STRING('"'),
 	VARIABLE("[a-zA-Z0-9_]", "[a-zA-Z0-9_]+");
 	
