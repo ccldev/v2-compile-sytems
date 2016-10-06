@@ -14,6 +14,7 @@ import csy.DefaultSystem;
 import csy.VariableDeclarationSystem;
 import csy.block.FunctionBlockSystem;
 import csy.block.IfBlockSystem;
+import csy.block.NativeBlockSystem;
 import csy.block.NormalBlockSystem;
 import csy.block.WhileBlockSystem;
 
@@ -103,6 +104,7 @@ public class CCL {
 		CompileSystems.BLOCK.add(new FunctionBlockSystem());
 		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
+		CompileSystems.BLOCK.add(new NativeBlockSystem());
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
 		CompileSystems.PRE.add(new IncludeSystem());
