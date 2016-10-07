@@ -19,6 +19,9 @@ import csy.block.NativeBlockSystem;
 import csy.block.NormalBlockSystem;
 import csy.block.WhileBlockSystem;
 
+import ccl.iface.IExpression;
+import ccl.iface.exec.CclError;
+import ccl.iface.exec.IExecuter;
 import ccl.v1.compile.CompileResult;
 import ccl.v1.compile.use.CclCompiler;
 import ccl.v1.read.Code;
@@ -31,9 +34,27 @@ import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.pre.PreProcessor;
 import ccl.v2_1.sys.CompileSystems;
+import ccl.vm.core.ErrorMarker;
 
 public class CCL {
 
+	public static IExpression<?> eval(InputStream fis, IExecuter interpreter) throws CclError{
+		IExpression<?> val = interpreter.act(fis);
+		if(val != null){
+			Object o = val.getValue();
+			if(o instanceof ErrorMarker){
+				Object err = ((ErrorMarker) o).data;
+				if(err instanceof Throwable){
+					((Throwable) err).printStackTrace();
+				}else{
+					System.err.println("An error occured!");
+					System.err.println(err);
+				}
+			}
+		}
+		return val;
+	}
+	
 	public static File compile(String name) throws IOException, DebugException, ImplementationException {
 		File in = new File(name);
 		File cl1 = new File(name.substring(0, name.length() - 1) + "1");
@@ -84,6 +105,7 @@ public class CCL {
 		while(s.hasNextLine()){
 			processor.process(s.nextLine());
 		}
+		s.close();
 		return processor.get();
 	}
 
@@ -119,6 +141,8 @@ public class CCL {
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableSetSystem());
 		CompileSystems.SNIPPET.add(new ReturnCompileSystem());
+		CompileSystems.SNIPPET.add(new ThrowSystem());
+		
 		CompileSystems.SNIPPET.add(new DefaultSystem());
 		
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
