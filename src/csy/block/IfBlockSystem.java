@@ -8,7 +8,6 @@ import csy.StaticValueCompiler;
 import ccl.v2_1.cat.CclCodeBlock;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystem;
 
 public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {

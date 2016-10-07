@@ -7,7 +7,6 @@ public class RegexBasedReadRoutine implements ValueReadRoutine{
 	private String regex;
 	private StringBuilder content = new StringBuilder();
 	private boolean lastMatched;
-	private String lastString;
 	private boolean ret;
 
 	public RegexBasedReadRoutine(String regex) {

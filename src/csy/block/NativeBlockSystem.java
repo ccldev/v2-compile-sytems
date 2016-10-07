@@ -7,7 +7,6 @@ import java.util.Scanner;
 import ccl.v2_1.cat.CclCodeBlock;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystem;
 
 public class NativeBlockSystem implements CompileSystem<CclCodeBlock, File>{
@@ -26,6 +25,7 @@ public class NativeBlockSystem implements CompileSystem<CclCodeBlock, File>{
 			ret.append(s.nextLine().trim());
 			ret.append("\n");
 		}
+		s.close();
 		return ret.toString();
 	}
 

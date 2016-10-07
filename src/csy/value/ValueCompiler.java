@@ -3,7 +3,6 @@ package csy.value;
 import csy.StaticTodoCompiler;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 
 public class ValueCompiler {
 

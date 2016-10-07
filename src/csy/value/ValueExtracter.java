@@ -5,7 +5,6 @@ import csy.routine.RegexBasedReadRoutine;
 import csy.routine.ValueReadRoutine;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 
 public class ValueExtracter {
 

@@ -2,8 +2,6 @@ package csy.todo;
 
 import java.util.regex.Pattern;
 
-import csy.value.ValueExtracter;
-
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 

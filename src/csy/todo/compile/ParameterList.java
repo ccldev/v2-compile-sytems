@@ -6,7 +6,6 @@ import java.util.List;
 import csy.Constants;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.layers.LayerSystem;
 
 public class ParameterList {

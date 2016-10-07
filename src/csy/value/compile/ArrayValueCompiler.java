@@ -4,7 +4,6 @@ import csy.array.ArrayItem;
 import csy.todo.compile.ParameterList;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 
 public class ArrayValueCompiler implements RawValueCompiler{
 

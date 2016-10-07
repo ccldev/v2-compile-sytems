@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import ccl.v2_1.cat.CclCodeSnippet;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystem;
 
 public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{

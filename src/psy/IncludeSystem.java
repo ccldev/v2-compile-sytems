@@ -39,6 +39,7 @@ public class IncludeSystem implements CompileSystem<String, Void>{
 		while(s.hasNextLine()){
 			processor.process(s.nextLine());
 		}
+		s.close();
 		
 		return processor.get();
 	}

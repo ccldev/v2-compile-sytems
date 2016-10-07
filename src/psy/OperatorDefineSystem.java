@@ -8,7 +8,6 @@ import csy.Operators;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 import ccl.v2_1.sys.CompileSystem;
 
 public class OperatorDefineSystem implements CompileSystem<String, Void>{

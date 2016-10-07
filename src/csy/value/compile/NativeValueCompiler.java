@@ -1,7 +1,5 @@
 package csy.value.compile;
 
-import ccl.v2_1.err.NI;
-
 public class NativeValueCompiler implements RawValueCompiler{
 
 	@Override
