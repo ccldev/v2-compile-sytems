@@ -37,9 +37,9 @@ import ccl.v2_1.sys.CompileSystems;
 import ccl.vm.core.ErrorMarker;
 
 public class CCL {
-
-	public static IExpression<?> eval(InputStream fis, IExecuter interpreter) throws CclError{
-		IExpression<?> val = interpreter.act(fis);
+	
+	public static IExpression eval(InputStream fis, IExecuter interpreter) throws CclError{
+		IExpression val = interpreter.act(fis);
 		if(val != null){
 			Object o = val.getValue();
 			if(o instanceof ErrorMarker){

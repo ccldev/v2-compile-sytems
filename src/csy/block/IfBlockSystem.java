@@ -17,7 +17,6 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	@Override
 	public boolean accept(CclCodeBlock infos) {
 		if(infos.getKeyword().equals("if")){
-			counter++;
 			return true;
 		}
 		return false;
@@ -28,6 +27,10 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			throws ImplementationException, DebugException, IOException {
 		StringBuilder builder = new StringBuilder();
 		
+		String content = infos.compileContent();
+		
+		counter++;
+		
 		builder.append(StaticValueCompiler.compileValue(infos.getCondition()));
 		builder.append("\n?:~\n");
 		builder.append("#:_if_" + counter + "_:goto\n");
@@ -36,7 +39,7 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		builder.append("#:_if_" + counter + "_:mark\n");
 		
 		//on if
-		builder.append(infos.compileContent());
+		builder.append(content);
 		
 		builder.append("\n#:_if_" + counter + "_end_:mark\n");
 		
