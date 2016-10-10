@@ -16,6 +16,7 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	
 	@Override
 	public boolean accept(CclCodeBlock infos) {
+		if(infos.getKeyword() == null) return false;
 		if(infos.getKeyword().equals("if")){
 			return true;
 		}

@@ -34,16 +34,14 @@ import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.pre.PreProcessor;
 import ccl.v2_1.sys.CompileSystems;
-import ccl.vm.core.ErrorMarker;
 
 public class CCL {
 	
 	public static IExpression eval(InputStream fis, IExecuter interpreter) throws CclError{
 		IExpression val = interpreter.act(fis);
 		if(val != null){
-			Object o = val.getValue();
-			if(o instanceof ErrorMarker){
-				Object err = ((ErrorMarker) o).data;
+			if(val.isError()){
+				Object err = val.getValue();
 				if(err instanceof Throwable){
 					((Throwable) err).printStackTrace();
 				}else{

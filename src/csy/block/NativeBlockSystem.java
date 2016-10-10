@@ -13,6 +13,7 @@ public class NativeBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	
 	@Override
 	public boolean accept(CclCodeBlock infos) {
+		if(infos.getKeyword() == null) return false;
 		return infos.getKeyword().equals("native");
 	}
 

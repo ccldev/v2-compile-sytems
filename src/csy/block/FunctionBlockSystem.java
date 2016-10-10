@@ -23,6 +23,7 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	
 	@Override
 	public boolean accept(CclCodeBlock infos) {
+		if(infos.getKeyword() == null) return false;
 		if(DEF_PATTERN.matcher(infos.getKeyword()).matches()){
 			count++;
 			this.name = extractName(infos.getKeyword());
