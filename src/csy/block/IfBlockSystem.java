@@ -33,8 +33,7 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		counter++;
 		
 		builder.append(StaticValueCompiler.compileValue(infos.getCondition()));
-		builder.append("\n?:~\n");
-		builder.append("#:_if_" + counter + "_:goto\n");
+		builder.append("\n?:_if_" + counter + "_\n");
 		builder.append("#:_if_" + counter + "_end_:goto\n");
 		
 		builder.append("#:_if_" + counter + "_:mark\n");

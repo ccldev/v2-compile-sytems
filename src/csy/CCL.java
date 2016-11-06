@@ -19,9 +19,6 @@ import csy.block.NativeBlockSystem;
 import csy.block.NormalBlockSystem;
 import csy.block.WhileBlockSystem;
 
-import ccl.iface.IExpression;
-import ccl.iface.exec.CclError;
-import ccl.iface.exec.IExecuter;
 import ccl.v1.compile.CompileResult;
 import ccl.v1.compile.use.CclCompiler;
 import ccl.v1.read.Code;
@@ -37,28 +34,11 @@ import ccl.v2_1.sys.CompileSystems;
 
 public class CCL {
 	
-	public static IExpression eval(InputStream fis, IExecuter interpreter) throws CclError{
-		IExpression val = interpreter.act(fis);
-		if(val != null){
-			if(val.isError()){
-				Object err = val.getValue();
-				if(err instanceof Throwable){
-					((Throwable) err).printStackTrace();
-				}else{
-					System.err.println("An error occured!");
-					System.err.println(err);
-				}
-			}
-		}
-		return val;
-	}
-	
 	public static File compile(String name) throws IOException, DebugException, ImplementationException {
 		File in = new File(name);
 		File cl1 = new File(name.substring(0, name.length() - 1) + "1");
 		cl1.createNewFile();
-		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
-
+		
 		PrintStream out = new PrintStream(cl1);
 		
 		String content = preProcess(readFileContent(in));
@@ -80,15 +60,17 @@ public class CCL {
 		}
 		
 		out.close();
-
-		CclCompiler compiler = new CclCompiler();
-		CompileResult res = compiler.compile(new Code(InputFactory.file(cl1)));
+		
+		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
+		cl0.createNewFile();
+		
+		CompileResult res = new CclCompiler().compile(new Code(InputFactory.file(cl1)));
 		res.makeError();
-
-		FileWriter writer = new FileWriter(cl0);
-		writer.write(res.getResult());
-		writer.close();
-
+		
+		FileWriter w = new FileWriter(cl0);
+		w.write(res.getResult());
+		w.close();
+		
 		return cl0;
 	}
 

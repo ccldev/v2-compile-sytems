@@ -2,7 +2,6 @@ package csy.value;
 
 import ccl.v2_1.err.ImplementationException;
 import csy.value.compile.ArrayValueCompiler;
-import csy.value.compile.NativeValueCompiler;
 import csy.value.compile.NumberValueCompiler;
 import csy.value.compile.RawValueCompiler;
 import csy.value.compile.StringValueCompiler;
@@ -40,7 +39,6 @@ public class ValueExtract {
 
 	public RawValueCompiler getCompiler() throws ImplementationException {
 		switch(type){
-		case NATIVE: return new NativeValueCompiler();
 		case STRING: return new StringValueCompiler();
 		case VARIABLE: return new VariableValueCompiler();
 		case ARRAY: return new ArrayValueCompiler();

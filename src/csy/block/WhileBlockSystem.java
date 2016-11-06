@@ -32,7 +32,7 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		
 		builder.append("#:_while_" + counter + "_start:mark\n");
 		builder.append(StaticValueCompiler.compileValue(infos.getCondition().trim()));
-		builder.append("\n?:~\n#:_while_" + counter + "_continue:goto");
+		builder.append("\n?:_while_" + counter + "_continue:goto");
 		builder.append("\n#:_while_" + counter + "_end:goto");
 		builder.append("\n#:_while_" + counter + "_continue:mark\n{\n");
 		builder.append(infos.compileContent());

@@ -7,7 +7,6 @@ import ccl.v2_1.err.ImplementationException;
 
 public enum ValueType {
 	
-	NATIVE('(', ')'),
 	ARRAY('[', ']'),
 	NUMBER("\\d", "\\d+"),
 	STRING('"'),
