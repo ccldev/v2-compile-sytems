@@ -24,7 +24,15 @@ public class VariableDeclarationSystem implements CompileSystem<CclCodeSnippet, 
 			throws ImplementationException, DebugException {
 		Matcher m = VAR_PATTERN.matcher(infos.getRaw());
 		m.matches();
-		return StaticValueCompiler.compileValue(m.group(2)) + "\nV1::" + m.group(1) + ":#";
+		
+		if(m.group(2).trim().equals("undefined")){
+			return ";:reserve " + m.group(1) + "\n;:pop";
+		}
+		
+		String base = ";:reserve " + m.group(1) + "\n" +
+				StaticValueCompiler.compileValue(m.group(2)) +
+				"\n;:store";
+		return base;
 	}
 
 	@Override
