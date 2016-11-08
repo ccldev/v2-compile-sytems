@@ -37,13 +37,13 @@ public class ArrayItem {
 		analyze();
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("D\nG:~:push\n");
+		builder.append("G:~:push\n");
 		builder.append(StaticValueCompiler.compileValue(value));
 		if(!name.isEmpty()){
-			builder.append("\nS\nG:S" + name);
-			builder.append("\nS\n;:invoke 2\nP");
+			builder.append("\nG:S" + name);
+			builder.append("\n;:invoke 2 1");
 		}else{
-			builder.append("\nS\n;:invoke 1\nP");
+			builder.append("\n;:invoke 1 1");
 		}
 		return builder.toString();
 	}

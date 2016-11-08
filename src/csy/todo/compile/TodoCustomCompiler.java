@@ -33,9 +33,9 @@ public class TodoCustomCompiler implements RawValueCompiler {
 		builder.append("\n");
 		if(!value.isEmpty()){
 			builder.append(StaticValueCompiler.compileValue(value));
-			builder.append("\nS\n;:invoke 1");
+			builder.append("\nS\n;:invoke 1 0");
 		}else{
-			builder.append(";:invoke 0");
+			builder.append(";:invoke 0 0");
 		}
 		return builder.toString();
 	}
