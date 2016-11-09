@@ -25,9 +25,9 @@ public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{
 			throws ImplementationException, DebugException, IOException {
 		Matcher m = SET_PATTERN.matcher(infos.getRaw());
 		m.matches();
-		return ";:load " + m.group(1) + "\n" +
+		return "load " + m.group(1) + "\n" +
 				StaticValueCompiler.compileValue(m.group(2)) +
-				"\n;:store";
+				"\nstore";
 	}
 
 	@Override

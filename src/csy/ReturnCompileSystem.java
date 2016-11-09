@@ -25,7 +25,7 @@ public class ReturnCompileSystem implements CompileSystem<CclCodeSnippet, File>{
 			throws ImplementationException, DebugException, IOException {
 		Matcher m = RET_PATTERN.matcher(infos.getRaw());
 		m.matches();
-		return StaticValueCompiler.compileValue(m.group(1)) + "\nR:~";
+		return StaticValueCompiler.compileValue(m.group(1)) + "\nret";
 	}
 
 	@Override

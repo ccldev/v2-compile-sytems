@@ -28,20 +28,22 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			throws ImplementationException, DebugException, IOException {
 		StringBuilder builder = new StringBuilder();
 		
-		String content = infos.compileContent();
+		String content = infos.compileContent().trim();
 		
 		counter++;
 		
 		builder.append(StaticValueCompiler.compileValue(infos.getCondition()));
-		builder.append("\n?:_if_" + counter + "_\n");
-		builder.append("#:_if_" + counter + "_end_:goto\n");
-		
-		builder.append("#:_if_" + counter + "_:mark\n");
+		builder.append("\nif _if_" + counter + "_\n");
+		builder.append("goto _if_" + counter + "_end_\n");
+		builder.append("mark _if_" + counter + "_");
 		
 		//on if
+		if(!content.isEmpty()){
+			builder.append("\n");
+		}
 		builder.append(content);
 		
-		builder.append("\n#:_if_" + counter + "_end_:mark\n");
+		builder.append("\nmark _if_" + counter + "_end_");
 		
 		return builder.toString();
 	}

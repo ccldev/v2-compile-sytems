@@ -8,7 +8,7 @@ public class VariableValueCompiler implements RawValueCompiler {
 	@Override
 	public String compileRawValue(String val) throws ImplementationException,
 			DebugException {
-		return "G:V" + val;
+		return "load " + val;
 	}
 
 }

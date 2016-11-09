@@ -2,7 +2,6 @@ package csy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -19,10 +18,6 @@ import csy.block.NativeBlockSystem;
 import csy.block.NormalBlockSystem;
 import csy.block.WhileBlockSystem;
 
-import ccl.v1.compile.CompileResult;
-import ccl.v1.compile.use.CclCompiler;
-import ccl.v1.read.Code;
-import ccl.v1.read.InputFactory;
 import ccl.v2_1.code.CclCode;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.Finisher;
@@ -36,10 +31,10 @@ public class CCL {
 	
 	public static File compile(String name) throws IOException, DebugException, ImplementationException {
 		File in = new File(name);
-		File cl1 = new File(name.substring(0, name.length() - 1) + "1");
-		cl1.createNewFile();
+		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
+		cl0.createNewFile();
 		
-		PrintStream out = new PrintStream(cl1);
+		PrintStream out = new PrintStream(cl0);
 		
 		String content = preProcess(readFileContent(in));
 		
@@ -53,23 +48,17 @@ public class CCL {
 		
 		for(int i = 0; i < parts.length; i++){
 			try {
-				out.println(parts[i].compile());
+				String c = parts[i].compile();
+				if(c.trim().isEmpty()){
+					continue;
+				}
+				out.println(c);
 			} catch (Exception e) {
 				new DebugHelper(parts[i]).consume(e);
 			}
 		}
 		
 		out.close();
-		
-		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
-		cl0.createNewFile();
-		
-		CompileResult res = new CclCompiler().compile(new Code(InputFactory.file(cl1)));
-		res.makeError();
-		
-		FileWriter w = new FileWriter(cl0);
-		w.write(res.getResult());
-		w.close();
 		
 		return cl0;
 	}
@@ -78,8 +67,7 @@ public class CCL {
 		PreProcessor processor = new PreProcessor();
 		
 		String completeCode = readContent(get("/res/header.cl2")) + "\n" + 
-								fileContent + "\n" + 
-								readContent(get("/res/finisher.cl2"));
+								fileContent;
 		
 		Scanner s = new Scanner(completeCode);
 		while(s.hasNextLine()){

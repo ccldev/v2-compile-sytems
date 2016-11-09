@@ -8,7 +8,7 @@ public class NumberValueCompiler implements RawValueCompiler {
 	@Override
 	public String compileRawValue(String val) throws ImplementationException,
 			DebugException {
-		return "G:" + (val.contains(".") ? "F" : "I") + val;
+		return "put" + (val.contains(".") ? "F" : "I") + " " + val;
 	}
 
 }

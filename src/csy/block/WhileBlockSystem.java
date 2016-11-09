@@ -29,15 +29,19 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 			throws ImplementationException, DebugException, IOException {
 		
 		StringBuilder builder = new StringBuilder();
+		String compiled = infos.compileContent().trim();
 		
-		builder.append("#:_while_" + counter + "_start:mark\n");
+		builder.append("mark _while_" + counter + "_start\n");
 		builder.append(StaticValueCompiler.compileValue(infos.getCondition().trim()));
-		builder.append("\n?:_while_" + counter + "_continue:goto");
-		builder.append("\n#:_while_" + counter + "_end:goto");
-		builder.append("\n#:_while_" + counter + "_continue:mark\n{\n");
-		builder.append(infos.compileContent());
-		builder.append("\n}\n#:_while_" + counter + "_start:goto");
-		builder.append("\n#:_while_" + counter + "_end:mark");
+		builder.append("\nif _while_" + counter + "_continue");
+		builder.append("\ngoto _while_" + counter + "_end");
+		builder.append("\nmark _while_" + counter + "_continue\nnewscope");
+		if(!compiled.isEmpty()){
+			builder.append("\n");
+		}
+		builder.append(compiled);
+		builder.append("\noldscope\ngoto _while_" + counter + "_start");
+		builder.append("\nmark _while_" + counter + "_end");
 		
 		return builder.toString();
 	}

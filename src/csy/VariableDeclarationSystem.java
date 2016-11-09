@@ -26,12 +26,12 @@ public class VariableDeclarationSystem implements CompileSystem<CclCodeSnippet, 
 		m.matches();
 		
 		if(m.group(2).trim().equals("undefined")){
-			return ";:reserve " + m.group(1) + "\n;:pop";
+			return "reserve " + m.group(1) + "\npop";
 		}
 		
-		String base = ";:reserve " + m.group(1) + "\n" +
+		String base = "reserve " + m.group(1) + "\n" +
 				StaticValueCompiler.compileValue(m.group(2)) +
-				"\n;:store";
+				"\nstore";
 		return base;
 	}
 

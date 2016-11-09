@@ -16,8 +16,9 @@ public class TodoInvokeCompiler implements RawValueCompiler {
 		ParameterList params = new ParameterList(val);
 		for(int i = 0; i < params.count(); i++){
 			builder.append(StaticValueCompiler.compileValue(params.get(i)));
+			builder.append("\n");
 		}
-		builder.append(";:invoke " + params.count() + " 1");
+		builder.append("invoke " + params.count());
 		
 		return builder.toString();
 	}

@@ -18,7 +18,7 @@ public class DefaultSystem implements CompileSystem<CclCodeSnippet, File>{
 	public String compileComplete(CclCodeSnippet infos)
 			throws ImplementationException, DebugException {
 		return StaticValueCompiler.compileValue(infos.getRaw().substring(0, infos.getRaw().length() - 1).trim()) + "\n" + 
-			"P";
+			"pop";
 	}
 
 	@Override

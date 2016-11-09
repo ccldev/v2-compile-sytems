@@ -28,14 +28,14 @@ public class TodoCustomCompiler implements RawValueCompiler {
 
 	private String buildResult(String opMethod, String value) throws DebugException, ImplementationException {
 		StringBuilder builder = new StringBuilder();
-		builder.append("G:~:");
+		builder.append("get ");
 		builder.append(opMethod);
 		builder.append("\n");
 		if(!value.isEmpty()){
 			builder.append(StaticValueCompiler.compileValue(value));
-			builder.append("\n;:invoke 1 1");
+			builder.append("\ninvoke 1");
 		}else{
-			builder.append(";:invoke 0 1");
+			builder.append("invoke 0");
 		}
 		return builder.toString();
 	}

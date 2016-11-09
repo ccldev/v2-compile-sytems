@@ -21,7 +21,8 @@ public class NormalBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException, IOException {
 		try {
-			return "{\n" + CclCodePart.compileAll(infos.getCodePart().buildCodeParts(1)) + "\n}";
+			String compiled = CclCodePart.compileAll(infos.getCodePart().buildCodeParts(1)).trim();
+			return "newscope" + (compiled.isEmpty() ? "" : "\n") + compiled + "\noldscope";
 		} catch (FileNotFoundException e) {
 			throw new DebugException(e);
 		}

@@ -21,8 +21,9 @@ public class ValueCompiler {
 	}
 
 	public String get() throws ImplementationException, DebugException {
-		return result.getCompiler().compileRawValue(result.getVal()) + "\n" + 
-				StaticTodoCompiler.compileTodo(result.getTodo());
+		String todo = StaticTodoCompiler.compileTodo(result.getTodo()).trim();
+		return result.getCompiler().compileRawValue(result.getVal()) + (todo.isEmpty() ? "" : "\n") + 
+				todo;
 	}
 
 }

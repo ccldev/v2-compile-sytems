@@ -100,7 +100,7 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	public String include() {
 		String path = getOutput().getPath();
 		path = path.substring(0, path.length() - 1) + "0";
-		return "V1::" + name + ":M" + path;
+		return "reserve " + name + "\nputM " + path + "\nstore";
 	}
 
 }
