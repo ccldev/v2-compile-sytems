@@ -3,12 +3,13 @@ package csy.block;
 import java.io.File;
 import java.io.IOException;
 
+import net.bplaced.opl.ccl.CompileSystem;
+import net.bplaced.opl.ccl.cat.CclCodeBlock;
+
 import csy.StaticValueCompiler;
 
-import ccl.v2_1.cat.CclCodeBlock;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.sys.CompileSystem;
 
 public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	

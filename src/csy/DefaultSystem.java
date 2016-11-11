@@ -2,10 +2,11 @@ package csy;
 
 import java.io.File;
 
-import ccl.v2_1.cat.CclCodeSnippet;
+import net.bplaced.opl.ccl.CompileSystem;
+import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.sys.CompileSystem;
 
 public class DefaultSystem implements CompileSystem<CclCodeSnippet, File>{
 

@@ -18,7 +18,7 @@ public class LayerBasedReadRoutine implements ValueReadRoutine {
 	public boolean process(char c, int next) {
 		layerState.feed(c);
 		finished = layerState.isBiggest(0) && lastLayer > 0;
-		lastLayer = layerState.get(Operators.GREATER_THEN);
+		lastLayer = layerState.get(Operators.GREATER_THAN);
 		return finished;
 	}
 

@@ -7,10 +7,11 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.bplaced.opl.ccl.CompileSystem;
+
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.pre.PreProcessor;
-import ccl.v2_1.sys.CompileSystem;
 
 public class IncludeSystem implements CompileSystem<String, Void>{
 

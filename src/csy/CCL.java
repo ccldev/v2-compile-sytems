@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import net.bplaced.opl.ccl.CompileSystems;
+
 import psy.IncludeSystem;
 import psy.OperatorDefineSystem;
 
@@ -25,7 +27,6 @@ import ccl.v2_1.debug.DebugHelper;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.pre.PreProcessor;
-import ccl.v2_1.sys.CompileSystems;
 
 public class CCL {
 	

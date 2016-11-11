@@ -4,11 +4,12 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.bplaced.opl.ccl.CompileSystem;
+import net.bplaced.opl.ccl.cat.CclCodeBlock;
+
 import ccl.v1.Tool;
-import ccl.v2_1.cat.CclCodeBlock;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.sys.CompileSystem;
 
 public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 
