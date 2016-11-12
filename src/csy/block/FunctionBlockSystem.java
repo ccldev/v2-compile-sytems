@@ -14,9 +14,9 @@ import ccl.v2_1.err.ImplementationException;
 public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 
 	private static final Pattern DEF_PATTERN = Pattern.compile
-			("\\s*def\\s+([a-zA-Z0-9_]+)");
+			("\\s*def\\s+([a-zA-Z0-9_]+)\\s*(\\[.+\\])?\\s*", Pattern.DOTALL);
 	private static final Pattern ARG_PATTERN = Pattern.compile
-			("\\s*([a-zA-Z0-9_]+)\\s*:?(.*)\\s*");
+			("\\s*([a-zA-Z0-9_]+)\\s*:?(.*)\\s*", Pattern.DOTALL);
 	
 	private static int count = 0;
 
@@ -28,13 +28,16 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		if(DEF_PATTERN.matcher(infos.getKeyword()).matches()){
 			count++;
 			this.name = extractName(infos.getKeyword());
+			if(infos.getAfterCondition().length() > 0){
+				System.err.println(infos.getAfterCondition());
+			}
 			return true;
 		}
 		return false;
 	}
 
 	private String extractName(String keyword) {
-		Matcher m = Pattern.compile("\\s*def\\s+([a-zA-Z0-9_]+)\\s*").matcher(keyword);
+		Matcher m = DEF_PATTERN.matcher(keyword);
 		m.matches();
 		return m.group(1);
 	}

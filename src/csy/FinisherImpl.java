@@ -11,13 +11,19 @@ import ccl.v2_1.err.ImplementationException;
 
 public class FinisherImpl implements IFinisher{
 	
+	private boolean head;
+	
+	public FinisherImpl(boolean head){
+		this.head = head;
+	}
+	
 	public String finish(CclCompileResult<File> res) throws IOException, DebugException, ImplementationException{
 		if(res.getOutput() != null){
 			PrintStream stream = new PrintStream(res.getOutput());
 			stream.println(res.getResult());
 			stream.close();
 			
-			CCL.compile(res.getOutput().getPath());
+			CCL.compile(head, res.getOutput().getPath());
 			
 			return res.getInclude();
 		}else{

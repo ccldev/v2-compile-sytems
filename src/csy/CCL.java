@@ -30,14 +30,14 @@ import ccl.v2_1.pre.PreProcessor;
 
 public class CCL {
 	
-	public static File compile(String name) throws IOException, DebugException, ImplementationException {
+	public static File compile(boolean head, String name) throws IOException, DebugException, ImplementationException {
 		File in = new File(name);
 		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
 		cl0.createNewFile();
 		
 		PrintStream out = new PrintStream(cl0);
 		
-		String content = preProcess(readFileContent(in));
+		String content = preProcess(head, readFileContent(in));
 		
 		CclCode code = new CclCode(content);
 		CclCodePart[] parts = null;
@@ -64,11 +64,13 @@ public class CCL {
 		return cl0;
 	}
 
-	private static String preProcess(String fileContent) throws DebugException, ImplementationException, IOException {
+	private static String preProcess(boolean header, String fileContent) throws DebugException, ImplementationException, IOException {
 		PreProcessor processor = new PreProcessor();
 		
-		String completeCode = readContent(get("/res/header.cl2")) + "\n" + 
-								fileContent;
+		String completeCode = fileContent;
+		if(header){
+			completeCode = readContent(get("/res/header.cl2")) + "\n" + completeCode;
+		}
 		
 		Scanner s = new Scanner(completeCode);
 		while(s.hasNextLine()){
@@ -104,8 +106,8 @@ public class CCL {
 		return builder.toString();
 	}
 	
-	public static void initSystems() {
-		Finisher.set(new FinisherImpl());
+	public static void initSystems(boolean head) {
+		Finisher.set(new FinisherImpl(head));
 		
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableSetSystem());
