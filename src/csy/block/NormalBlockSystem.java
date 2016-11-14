@@ -23,7 +23,10 @@ public class NormalBlockSystem implements CompileSystem<CclCodeBlock, File>{
 			throws ImplementationException, DebugException, IOException {
 		try {
 			String compiled = CclCodePart.compileAll(infos.getCodePart().buildCodeParts(1)).trim();
-			return "newscope" + (compiled.isEmpty() ? "" : "\n") + compiled + "\noldscope";
+			if(compiled.isEmpty()){
+				return "";
+			}
+			return "newscope\n" + compiled + "\noldscope";
 		} catch (FileNotFoundException e) {
 			throw new DebugException(e);
 		}

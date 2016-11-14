@@ -6,6 +6,7 @@ import java.io.IOException;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
+import csy.SpecialResults;
 import csy.StaticValueCompiler;
 
 import ccl.v2_1.err.DebugException;
@@ -30,18 +31,34 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 			throws ImplementationException, DebugException, IOException {
 		
 		StringBuilder builder = new StringBuilder();
+		
+		String condition = StaticValueCompiler.compileValue(infos.getCondition().trim());
+		
+		if(condition.equals(SpecialResults.FALSE)){
+			return "";
+		}
+		
 		String compiled = infos.compileContent().trim();
 		
-		builder.append("mark _while_" + counter + "_start\n");
-		builder.append(StaticValueCompiler.compileValue(infos.getCondition().trim()));
-		builder.append("\nif _while_" + counter + "_continue");
-		builder.append("\ngoto _while_" + counter + "_end");
-		builder.append("\nmark _while_" + counter + "_continue\nnewscope");
-		if(!compiled.isEmpty()){
+		builder.append("mark _while_" + counter + "_start");
+		
+		if(!condition.equals(SpecialResults.TRUE)){
+			//Normal
 			builder.append("\n");
+			builder.append(condition);
+			builder.append("\nif _while_" + counter + "_continue");
+			builder.append("\ngoto _while_" + counter + "_end");
+			builder.append("\nmark _while_" + counter + "_continue");
+		}else{
+			//while-true loop
 		}
-		builder.append(compiled);
-		builder.append("\noldscope\ngoto _while_" + counter + "_start");
+		
+		if(!compiled.isEmpty()){
+			builder.append("\nnewscope\n");
+			builder.append(compiled);
+			builder.append("\noldscope");
+		}
+		builder.append("\ngoto _while_" + counter + "_start");
 		builder.append("\nmark _while_" + counter + "_end");
 		
 		return builder.toString();

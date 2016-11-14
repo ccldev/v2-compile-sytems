@@ -6,6 +6,7 @@ import java.io.IOException;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
+import csy.SpecialResults;
 import csy.StaticValueCompiler;
 
 import ccl.v2_1.err.DebugException;
@@ -31,20 +32,37 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		
 		String content = infos.compileContent().trim();
 		
-		counter++;
+		String condition = StaticValueCompiler.compileValue(infos.getCondition()).trim();
 		
-		builder.append(StaticValueCompiler.compileValue(infos.getCondition()));
-		builder.append("\nif _if_" + counter + "_\n");
-		builder.append("goto _if_" + counter + "_end_\n");
-		builder.append("mark _if_" + counter + "_");
-		
-		//on if
-		if(!content.isEmpty()){
-			builder.append("\n");
+		if(condition.equals(SpecialResults.FALSE)){
+			return "";
 		}
-		builder.append(content);
 		
-		builder.append("\nmark _if_" + counter + "_end_");
+		builder.append(condition);
+		
+		if(!content.isEmpty()){
+			counter++;
+			
+			if(!condition.equals(SpecialResults.TRUE)){
+				builder.append("\nif _if_" + counter + "_\n");
+				builder.append("goto _if_" + counter + "_end_\n");
+				builder.append("mark _if_" + counter + "_");
+			}
+			
+			//on if
+			if(!content.isEmpty()){
+				builder.append("\n");
+			}
+			builder.append(content);
+			
+			if(!condition.equals(SpecialResults.TRUE)){
+				builder.append("\nmark _if_" + counter + "_end_");
+			}else{
+				builder.append("\npop");
+			}
+		}else{
+			builder.append("\npop");
+		}
 		
 		return builder.toString();
 	}

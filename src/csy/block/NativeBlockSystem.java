@@ -28,7 +28,7 @@ public class NativeBlockSystem implements CompileSystem<CclCodeBlock, File>{
 			ret.append("\n");
 		}
 		s.close();
-		return ret.toString();
+		return ret.toString().trim();
 	}
 
 	@Override
