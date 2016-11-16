@@ -73,23 +73,31 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		
 		value = value.trim();
 		if(!value.isEmpty()){
-			builder.append(value);
+			if(value.equals("...")){
+				builder.append("parameters.cut(");
+				builder.append(index);
+				builder.append(")");
+			}else{
+				builder.append(value);
+			}
 		}else{
 			builder.append("undefined");
 		}
 		
 		builder.append(";\n");
 		
-		builder.append("if(");
-		builder.append(index);
-		builder.append(".lss(parameters.length())){");
-		
-		builder.append(name);
-		builder.append("=parameters.get(");
-		builder.append(index);
-		builder.append(");");
-		
-		builder.append("}");
+		if(!value.equals("...")){
+			builder.append("if(");
+			builder.append(index);
+			builder.append(".lss(parameters.length())){");
+			
+			builder.append(name);
+			builder.append("=parameters.get(");
+			builder.append(index);
+			builder.append(");");
+			
+			builder.append("}");
+		}
 		
 		return builder.toString();
 		

@@ -106,7 +106,7 @@ public class CCL {
 		return builder.toString();
 	}
 	
-	public static void initSystems(boolean head) {
+	public static void initSystems(boolean head, String libPrefix) {
 		Finisher.set(new FinisherImpl(head));
 		
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
@@ -123,7 +123,7 @@ public class CCL {
 		CompileSystems.BLOCK.add(new NativeBlockSystem());
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
-		CompileSystems.PRE.add(new IncludeSystem());
+		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
 	}
 
 }

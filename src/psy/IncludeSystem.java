@@ -15,6 +15,15 @@ import ccl.v2_1.pre.PreProcessor;
 
 public class IncludeSystem implements CompileSystem<String, Void>{
 
+	private String libPrefix;
+
+	public IncludeSystem(String libPrefix){
+		if(!libPrefix.endsWith("/")){
+			libPrefix += "/";
+		}
+		this.libPrefix = libPrefix;
+	}
+	
 	private ArrayList<String> included = new ArrayList<String>();
 	
 	private static final Pattern INCLUDE_PATTERN = Pattern.compile
@@ -36,7 +45,7 @@ public class IncludeSystem implements CompileSystem<String, Void>{
 		if(included.contains(m.group(1))) return "";
 		included.add(m.group(1));
 		
-		Scanner s = new Scanner(new File(m.group(1)));
+		Scanner s = new Scanner(new File(libPrefix + m.group(1)));
 		while(s.hasNextLine()){
 			processor.process(s.nextLine());
 		}
