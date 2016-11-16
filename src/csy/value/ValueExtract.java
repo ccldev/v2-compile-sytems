@@ -4,6 +4,7 @@ import ccl.v2_1.err.ImplementationException;
 import csy.value.compile.ArrayValueCompiler;
 import csy.value.compile.NumberValueCompiler;
 import csy.value.compile.RawValueCompiler;
+import csy.value.compile.RegexValueCompiler;
 import csy.value.compile.StringValueCompiler;
 import csy.value.compile.VariableValueCompiler;
 
@@ -43,6 +44,7 @@ public class ValueExtract {
 		case VARIABLE: return new VariableValueCompiler();
 		case ARRAY: return new ArrayValueCompiler();
 		case NUMBER: return new NumberValueCompiler();
+		case REGEX: return new RegexValueCompiler();
 		default: throw new ImplementationException("Unable to compute compiler for type " + type);
 		}
 	}

@@ -10,7 +10,8 @@ public enum ValueType {
 	ARRAY('[', ']'),
 	NUMBER("\\d", "\\d+"),
 	STRING('"'),
-	VARIABLE("[a-zA-Z0-9_]", "[a-zA-Z0-9_]+");
+	VARIABLE("[a-zA-Z0-9_]", "[a-zA-Z0-9_]+"),
+	REGEX('/');
 	
 	char opener;
 	char closer;
