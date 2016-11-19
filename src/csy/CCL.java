@@ -109,7 +109,9 @@ public class CCL {
 	public static void initSystems(boolean head, String libPrefix) {
 		Finisher.set(new FinisherImpl(head));
 		
+		CompileSystems.SNIPPET.add(new EmptyVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
+		CompileSystems.SNIPPET.add(new ArrayVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableSetSystem());
 		CompileSystems.SNIPPET.add(new ReturnCompileSystem());
 		CompileSystems.SNIPPET.add(new ThrowSystem());
