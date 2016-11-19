@@ -18,9 +18,9 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	private static final Pattern ARG_PATTERN = Pattern.compile
 			("\\s*([a-zA-Z0-9_]+)\\s*:?(.*)\\s*", Pattern.DOTALL);
 	
-	private static int count = 0;
+	protected static int count = 0;
 
-	private String name;
+	protected String name;
 	
 	@Override
 	public boolean accept(CclCodeBlock infos) {
@@ -48,7 +48,7 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		return parseParameters(infos.getCondition()) + "\n" + infos.getContent();
 	}
 
-	private String parseParameters(String raw) {
+	protected String parseParameters(String raw) {
 		StringBuilder builder = new StringBuilder();
 		
 		if(raw.trim().length() == 0) return "";

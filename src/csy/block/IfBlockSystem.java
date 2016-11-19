@@ -46,7 +46,8 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			if(!condition.equals(SpecialResults.TRUE)){
 				builder.append("\nif _if_" + counter + "_\n");
 				builder.append("goto _if_" + counter + "_end_\n");
-				builder.append("mark _if_" + counter + "_");
+				builder.append("mark _if_" + counter + "_\n");
+				builder.append("newscope");
 			}
 			
 			//on if
@@ -56,6 +57,7 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			builder.append(content);
 			
 			if(!condition.equals(SpecialResults.TRUE)){
+				builder.append("\noldscope");
 				builder.append("\nmark _if_" + counter + "_end_");
 			}else{
 				builder.append("\npop");
