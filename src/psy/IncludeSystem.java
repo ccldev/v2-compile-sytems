@@ -42,10 +42,22 @@ public class IncludeSystem implements CompileSystem<String, Void>{
 		
 		PreProcessor processor = new PreProcessor();
 		
-		if(included.contains(m.group(1))) return "";
-		included.add(m.group(1));
+		String fpath = m.group(1);
+		if(fpath.startsWith("<") && fpath.endsWith(">")){
+			fpath = fpath.substring(1, fpath.length() - 1);
+			fpath = libPrefix + "ccl/std/" + fpath + ".cl2";
+		}else if(fpath.startsWith("\"") && fpath.endsWith("\"")){
+			fpath = fpath.substring(1, fpath.length() - 1);
+		}else{
+			fpath = libPrefix + fpath;
+		}
 		
-		Scanner s = new Scanner(new File(libPrefix + m.group(1)));
+		if(included.contains(fpath.toUpperCase())){
+			return "";
+		}
+		included.add(fpath.toUpperCase());
+		
+		Scanner s = new Scanner(new File(fpath));
 		while(s.hasNextLine()){
 			processor.process(s.nextLine());
 		}

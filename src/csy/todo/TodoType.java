@@ -9,6 +9,7 @@ public enum TodoType {
 	
 	GET("\\.", "\\.([a-zA-Z0-9_]+)"),
 	INVOKE('(', ')'),
+	GET_DYNAMIC('[',']'),
 	EMPTY(null, null),
 	CUSTOM;
 	

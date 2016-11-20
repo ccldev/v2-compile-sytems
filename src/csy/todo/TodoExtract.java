@@ -2,6 +2,7 @@ package csy.todo;
 
 import ccl.v2_1.err.ImplementationException;
 import csy.todo.compile.TodoCustomCompiler;
+import csy.todo.compile.TodoDynamicGetCompiler;
 import csy.todo.compile.TodoGetCompiler;
 import csy.todo.compile.TodoInvokeCompiler;
 import csy.value.compile.RawValueCompiler;
@@ -39,6 +40,7 @@ public class TodoExtract {
 	public RawValueCompiler getCompiler() throws ImplementationException {
 		switch(type){
 		case GET: return new TodoGetCompiler();
+		case GET_DYNAMIC: return new TodoDynamicGetCompiler();
 		case INVOKE: return new TodoInvokeCompiler();
 		case CUSTOM: return new TodoCustomCompiler();
 		default: throw new ImplementationException("Unable to compute compiler for type " + type);

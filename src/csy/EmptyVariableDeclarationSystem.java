@@ -13,7 +13,7 @@ import net.bplaced.opl.ccl.cat.CclCodeSnippet;
 public class EmptyVariableDeclarationSystem implements CompileSystem<CclCodeSnippet, File>{
 
 	private static final Pattern VAR_PATTERN = Pattern.compile
-			("\\s*var\\s+([a-zA-Z0-9_]+)\\s*;", Pattern.DOTALL);
+			("\\s*var\\s+([a-zA-Z0-9_\\s,]+)\\s*;", Pattern.DOTALL);
 	
 	@Override
 	public boolean accept(CclCodeSnippet infos) {
@@ -26,7 +26,18 @@ public class EmptyVariableDeclarationSystem implements CompileSystem<CclCodeSnip
 		Matcher m = VAR_PATTERN.matcher(infos.getRaw());
 		m.matches();
 		
-		return "reserve " + m.group(1) + "\npop";
+		String[] split = m.group(1).split(",");
+		
+		StringBuilder b = new StringBuilder();
+		
+		for(int i = 0; i < split.length; i++){
+			b.append("reserve " + split[i].trim() + "\npop");
+			if(i < split.length - 1){
+				b.append("\n");
+			}
+		}
+		
+		return b.toString();
 	}
 
 	@Override
