@@ -14,6 +14,7 @@ import psy.OperatorDefineSystem;
 
 import csy.DefaultSystem;
 import csy.VariableDeclarationSystem;
+import csy.block.ElseStub;
 import csy.block.FunctionBlockSystem;
 import csy.block.IfBlockSystem;
 import csy.block.NativeBlockSystem;
@@ -49,7 +50,7 @@ public class CCL {
 		
 		for(int i = 0; i < parts.length; i++){
 			try {
-				String c = parts[i].compile();
+				String c = parts[i].compile(i + 1 < parts.length ? parts[i+1] : null);
 				if(c.trim().isEmpty()){
 					continue;
 				}
@@ -124,6 +125,7 @@ public class CCL {
 		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
 		CompileSystems.BLOCK.add(new NativeBlockSystem());
+		CompileSystems.BLOCK.add(new ElseStub());
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));

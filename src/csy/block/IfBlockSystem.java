@@ -6,15 +6,18 @@ import java.io.IOException;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
+import csy.BlockTool;
 import csy.SpecialResults;
 import csy.StaticValueCompiler;
 
+import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
 public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 
 	private static int counter = 0;
+	private String elseContent;
 	
 	@Override
 	public boolean accept(CclCodeBlock infos) {
@@ -28,6 +31,9 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	@Override
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException, IOException {
+		
+		elseContent = BlockTool.elseContent(infos);
+		
 		StringBuilder builder = new StringBuilder();
 		
 		String content = infos.compileContent().trim();
@@ -35,35 +41,32 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		String condition = StaticValueCompiler.compileValue(infos.getCondition()).trim();
 		
 		if(condition.equals(SpecialResults.FALSE)){
-			return "";
+			return elseContent == null ? "" : elseContent;
 		}
-		
-		builder.append(condition);
 		
 		if(!content.isEmpty()){
 			counter++;
 			
+			builder.append(condition);
+			
 			if(!condition.equals(SpecialResults.TRUE)){
-				builder.append("\nif _if_" + counter + "_\n");
-				builder.append("goto _if_" + counter + "_end_\n");
-				builder.append("mark _if_" + counter + "_\n");
-				builder.append("newscope");
+				builder.append("\nif _if_" + counter + "_");
+				builder.append(elseContent == null ? "" : "\n" + elseContent);
+				builder.append("\ngoto _if_" + counter + "_end_\n");
+				builder.append("mark _if_" + counter + "_");
 			}
+			builder.append("\nnewscope");
 			
 			//on if
 			if(!content.isEmpty()){
 				builder.append("\n");
+				builder.append(content);
 			}
-			builder.append(content);
 			
+			builder.append("\noldscope");
 			if(!condition.equals(SpecialResults.TRUE)){
-				builder.append("\noldscope");
 				builder.append("\nmark _if_" + counter + "_end_");
-			}else{
-				builder.append("\npop");
 			}
-		}else{
-			builder.append("\npop");
 		}
 		
 		return builder.toString();
