@@ -32,7 +32,9 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException, IOException {
 		
-		elseContent = BlockTool.elseContent(infos);
+		elseContent = 	"newscope\n" + 
+						BlockTool.elseContent(infos) + 
+						"\noldscope";
 		
 		StringBuilder builder = new StringBuilder();
 		

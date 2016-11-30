@@ -14,7 +14,7 @@ public class ArrayVariableDeclarationSystem implements CompileSystem<CclCodeSnip
 	private static final Pattern VAR_PATTERN = Pattern.compile
 			("\\s*var\\s+\\[([^=]+)\\]\\s*=\\s*(.+)\\s*;", Pattern.DOTALL);
 	private static final Pattern PART_PATTERN = Pattern.compile
-			("!?\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*(:[a-zA-Z_][a-zA-Z0-9_]*)?", Pattern.DOTALL);
+			("!?\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*(:\\s*[a-zA-Z_][a-zA-Z0-9_]*)?", Pattern.DOTALL);
 	
 	@Override
 	public boolean accept(CclCodeSnippet infos) {
@@ -61,7 +61,7 @@ public class ArrayVariableDeclarationSystem implements CompileSystem<CclCodeSnip
 		if(m.group(2) == null){
 			b.append(m.group(1));
 		}else{
-			b.append(m.group(2).substring(1));
+			b.append(m.group(2).substring(1).trim());
 		}
 		
 		b.append("\nload ");
