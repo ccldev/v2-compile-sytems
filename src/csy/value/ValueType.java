@@ -1,36 +1,56 @@
 package csy.value;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import csy.value.compile.RawValueCompiler;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
-public enum ValueType {
+public class ValueType implements IValueTypes{
 	
-	ARRAY('[', ']'),
-	NUMBER("\\d", "\\d+"),
-	STRING('"'),
-	VARIABLE("[a-zA-Z0-9_]", "[a-zA-Z0-9_]+"),
-	REGEX('/');
+	static{
+		list = new ArrayList<ValueType>();
+		
+		register(ARRAY);
+		register(FUNC_LITERAL);
+		register(NUMBER);
+		register(REGEX);
+		register(STRING);
+		register(VARIABLE);
+	}
+	
+	private static ArrayList<ValueType> list;
+	public static ValueType[] values(){
+		return list.toArray(new ValueType[0]);
+	}
+	public static void register(ValueType t){
+		list.add(t);
+	}
 	
 	char opener;
 	char closer;
 	private String charInfo;
 	String valueInfo;
+	public final RawValueCompiler compiler;
 
-	private ValueType(char opener, char closer){
+	public ValueType(char opener, char closer, RawValueCompiler compiler){
 		this.opener = opener;
 		this.closer = closer;
+		this.compiler = compiler;
 	}
 	
-	private ValueType(char openAndClose){
+	public ValueType(char openAndClose, RawValueCompiler compiler){
 		this.opener = openAndClose;
 		this.closer = openAndClose;
+		this.compiler = compiler;
 	}
 	
-	private ValueType(String charInfo, String valueInfo){
+	public ValueType(String charInfo, String valueInfo, RawValueCompiler compiler){
 		this.charInfo = charInfo;
 		this.valueInfo = valueInfo;
+		this.compiler = compiler;
 	}
 	
 	public boolean matches(char c){

@@ -31,4 +31,9 @@ public class FinisherImpl implements IFinisher{
 		}
 	}
 	
+	@Override
+	public String finish(File method) throws IOException, DebugException, ImplementationException{
+		return "putM " + CCL.compile(head, method.getPath()).getPath();
+	}
+	
 }

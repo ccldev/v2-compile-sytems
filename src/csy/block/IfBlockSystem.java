@@ -10,7 +10,6 @@ import csy.BlockTool;
 import csy.SpecialResults;
 import csy.StaticValueCompiler;
 
-import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
