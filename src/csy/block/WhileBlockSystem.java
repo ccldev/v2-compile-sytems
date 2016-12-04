@@ -20,7 +20,6 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	public boolean accept(CclCodeBlock infos) {
 		if(infos.getKeyword() == null) return false;
 		if(infos.getKeyword().equals("while")){
-			counter++;
 			return true;
 		}
 		return false;
@@ -39,6 +38,8 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		}
 		
 		String compiled = infos.compileContent().trim();
+		
+		counter++;
 		
 		builder.append("mark _while_" + counter + "_start");
 		
