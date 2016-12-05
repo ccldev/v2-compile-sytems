@@ -10,6 +10,7 @@ import java.util.Scanner;
 import net.bplaced.opl.ccl.CompileSystems;
 
 import psy.IncludeSystem;
+import psy.LiteralDefineSystem;
 import psy.OperatorDefineSystem;
 
 import csy.DefaultSystem;
@@ -129,6 +130,7 @@ public class CCL {
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
+		CompileSystems.PRE.add(new LiteralDefineSystem());
 	}
 
 }
