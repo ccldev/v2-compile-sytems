@@ -12,8 +12,9 @@ import net.bplaced.opl.ccl.CompileSystems;
 import psy.IncludeSystem;
 import psy.LiteralDefineSystem;
 import psy.OperatorDefineSystem;
+import psy.SnippetSystem;
+import psy.UnsafeSystem;
 
-import csy.DefaultSystem;
 import csy.VariableDeclarationSystem;
 import csy.block.ElseStub;
 import csy.block.FunctionBlockSystem;
@@ -119,18 +120,19 @@ public class CCL {
 		CompileSystems.SNIPPET.add(new ReturnCompileSystem());
 		CompileSystems.SNIPPET.add(new ThrowSystem());
 		
-		CompileSystems.SNIPPET.add(new DefaultSystem());
+		CompileSystems.SNIPPET.setDefault(new DefaultSystem());
 		
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
 		CompileSystems.BLOCK.add(new FunctionBlockSystem());
 		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
-		CompileSystems.BLOCK.add(new NativeBlockSystem());
 		CompileSystems.BLOCK.add(new ElseStub());
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
 		CompileSystems.PRE.add(new LiteralDefineSystem());
+		CompileSystems.PRE.add(new SnippetSystem());
+		CompileSystems.PRE.add(new UnsafeSystem());
 	}
 
 }

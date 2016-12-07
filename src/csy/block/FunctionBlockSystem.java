@@ -27,9 +27,6 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		if(DEF_PATTERN.matcher(infos.getKeyword()).matches()){
 			count++;
 			this.name = extractName(infos.getKeyword());
-			if(infos.getAfterCondition().length() > 0){
-				System.err.println(infos.getAfterCondition());
-			}
 			return true;
 		}
 		return false;

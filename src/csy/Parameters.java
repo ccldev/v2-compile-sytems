@@ -11,6 +11,10 @@ public class Parameters {
 			("\\s*([a-zA-Z0-9_]+)\\s*:?(.*)\\s*", Pattern.DOTALL);
 	
 	public static String parseParameters(String raw) {
+		if(raw == null){
+			return "";
+		}
+		
 		StringBuilder builder = new StringBuilder();
 		
 		if(raw.trim().length() == 0) return "";
