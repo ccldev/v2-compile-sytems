@@ -28,8 +28,9 @@ public class ThrowSystem implements CompileSystem<CclCodeSnippet, File>{
 		m.matches();
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("load error\n");
 		builder.append(StaticValueCompiler.compileValue(m.group(1)));
-		builder.append("\nload error\ninvoke 1\nret");
+		builder.append("\ninvoke 1\nret");
 		
 		return builder.toString();
 	}
