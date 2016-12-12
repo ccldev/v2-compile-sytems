@@ -10,6 +10,9 @@ public class StringValueCompiler implements RawValueCompiler {
 			DebugException {
 		val = val.trim();
 		val = val.substring(1, val.length() - 1);
+		if(val.endsWith(" ")){
+			val = val + "\\";
+		}
 		return "putS " + val;
 	}
 	
