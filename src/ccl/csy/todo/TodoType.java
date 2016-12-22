@@ -11,7 +11,6 @@ public enum TodoType {
 	INVOKE('(', ')'),
 	GET_DYNAMIC('[',']'),
 	EMPTY(null, null),
-	COMMENT("/", "//[^\n]*"),
 	CUSTOM;
 	
 	char opener;
