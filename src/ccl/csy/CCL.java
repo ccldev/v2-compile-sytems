@@ -12,6 +12,7 @@ import net.bplaced.opl.ccl.CompileSystems;
 
 
 import ccl.csy.VariableDeclarationSystem;
+import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;
 import ccl.csy.block.FunctionBlockSystem;
 import ccl.csy.block.IfBlockSystem;
@@ -127,6 +128,8 @@ public class CCL {
 		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
 		CompileSystems.BLOCK.add(new ElseStub());
+		
+		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
 		
 		CompileSystems.PRE.add(new OperatorDefineSystem());
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
