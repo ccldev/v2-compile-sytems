@@ -41,12 +41,13 @@ public class FunctionBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	@Override
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException {
-		return Parameters.parseParameters(infos.getCondition()) + "\n" + infos.getContent();
+		return Parameters.parseParameters(infos.getCondition()) + "\n"
+			+ infos.getContent();
 	}
 
 	@Override
 	public File getOutput() {
-		return new File("__func" + count + "__.cl2");
+		return new File("__" + name + "_" + count + "__.cl2");
 	}
 
 	@Override
