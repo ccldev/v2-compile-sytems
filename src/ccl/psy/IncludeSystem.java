@@ -3,6 +3,7 @@ package ccl.psy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,28 +41,47 @@ public class IncludeSystem implements CompileSystem<String, Void>{
 		Matcher m = INCLUDE_PATTERN.matcher(infos);
 		m.matches();
 		
+		String prefix = "";
+		String suffix = "";
+		boolean prefixSet = false;
+		
 		PreProcessor processor = new PreProcessor();
 		
+		//Set prefix and suffix
 		String fpath = m.group(1);
 		if(fpath.startsWith("<") && fpath.endsWith(">")){
+			prefix = libPrefix + "ccl/std/";
+			prefixSet = true;
+			suffix = ".cl2";
 			fpath = fpath.substring(1, fpath.length() - 1);
-			fpath = libPrefix + "ccl/std/" + fpath + ".cl2";
 		}else if(fpath.startsWith("\"") && fpath.endsWith("\"")){
 			fpath = fpath.substring(1, fpath.length() - 1);
 		}else{
-			fpath = libPrefix + fpath;
+			prefix = libPrefix;
 		}
 		
-		if(included.contains(fpath.toUpperCase())){
-			return "";
-		}
-		included.add(fpath.toUpperCase());
+		int startDex = 0;
+		String[] libs = fpath.split("\\s+");
 		
-		Scanner s = new Scanner(new File(fpath));
-		while(s.hasNextLine()){
-			processor.process(s.nextLine());
+		if((!prefixSet) && libs.length > 1){
+			prefix = prefix + libs[0] + "/";
+			startDex = 1;
 		}
-		s.close();
+		
+		for(int i = startDex;i < libs.length; i++){
+			String fname = prefix + libs[i] + suffix;
+			
+			if(included.contains(fname.toUpperCase())){
+				continue;
+			}
+			included.add(fname.toUpperCase());
+			
+			Scanner s = new Scanner(new File(fname));
+			while(s.hasNextLine()){
+				processor.process(s.nextLine());
+			}
+			s.close();
+		}
 		
 		return processor.get();
 	}

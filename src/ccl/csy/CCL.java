@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 import net.bplaced.opl.ccl.CompileSystems;
 
-
-
 import ccl.csy.VariableDeclarationSystem;
 import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;

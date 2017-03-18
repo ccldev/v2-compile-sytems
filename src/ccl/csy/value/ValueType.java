@@ -19,6 +19,7 @@ public class ValueType implements IValueTypes{
 		register(REGEX);
 		register(STRING);
 		register(VARIABLE);
+		register(UNBOUND);
 	}
 	
 	private static ArrayList<ValueType> list;
