@@ -11,7 +11,7 @@ import ccl.csy.value.compile.VariableValueCompiler;
 public interface IValueTypes {
 	
 	ValueType ARRAY = new ValueType('[', ']', new ArrayValueCompiler());
-	ValueType NUMBER = new ValueType("\\d", "\\d+", new NumberValueCompiler());
+	ValueType NUMBER = new ValueType("\\d|-", "-?\\d+", new NumberValueCompiler());
 	ValueType STRING = new ValueType('"', new StringValueCompiler());
 	ValueType VARIABLE = new ValueType("[a-zA-Z0-9_]", "[a-zA-Z0-9_]+", new VariableValueCompiler());
 	ValueType REGEX = new ValueType('/', new RegexValueCompiler());
