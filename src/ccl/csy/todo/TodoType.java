@@ -7,7 +7,7 @@ import ccl.v2_1.err.ImplementationException;
 
 public enum TodoType {
 	
-	GET("\\.", "\\.\\s*([a-zA-Z0-9_]+)"),
+	GET("\\.", "\\.\\s*([a-zA-Z0-9_@]+)"),
 	INVOKE('(', ')'),
 	GET_DYNAMIC('[',']'),
 	EMPTY(null, null),

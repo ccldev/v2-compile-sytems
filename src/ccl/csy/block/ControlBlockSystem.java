@@ -34,13 +34,25 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		w.write(infos.getContent());
 		w.close();
 		
+		//load ...
+		//{}
+		//invoke ...
+		//pop
+		
 		StringBuilder res = new StringBuilder();
-		res.append(Finisher.finish(func));
-		res.append("\nget ");
+		res.append("load ");
 		res.append(infos.getKeyword());
 		res.append("\n");
 		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
-		res.append("pop");
+		res.append(Finisher.finish(func));
+		res.append("\ninvoke 1\npop");
+		
+//		res.append(Finisher.finish(func));
+//		res.append("\nget ");
+//		res.append(infos.getKeyword());
+//		res.append("\n");
+//		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
+//		res.append("pop");
 		
 		return res.toString().trim();
 	}
