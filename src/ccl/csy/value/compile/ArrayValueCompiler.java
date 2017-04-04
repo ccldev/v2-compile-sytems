@@ -10,7 +10,7 @@ public class ArrayValueCompiler implements RawValueCompiler{
 	@Override
 	public String compileRawValue(String val) throws ImplementationException,
 			DebugException {
-		StringBuilder builder = new StringBuilder("putA 0");
+		StringBuilder builder = new StringBuilder("putA");
 		
 		val = val.trim();
 		val = val.substring(1, val.length() - 1);

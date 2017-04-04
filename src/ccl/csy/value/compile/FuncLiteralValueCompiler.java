@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-
 
 import ccl.csy.Parameters;
-import ccl.csy.StaticValueCompiler;
 import ccl.v1.Tool;
 import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;

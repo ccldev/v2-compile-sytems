@@ -1,14 +1,13 @@
 package ccl.csy.block;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
-
-import ccl.csy.SpecialResults;
-import ccl.csy.StaticValueCompiler;
+import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
@@ -29,40 +28,27 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException, IOException {
 		
-		StringBuilder builder = new StringBuilder();
+		File func = new File("_w" + counter + "_.cl2");
+		FileWriter w = new FileWriter(func);
+		w.write(infos.getContent());
+		w.close();
 		
-		String condition = StaticValueCompiler.compileValue(infos.getCondition().trim());
+		StringBuilder res = new StringBuilder();
+		res.append("load while\n");
 		
-		if(condition.equals(SpecialResults.FALSE)){
-			return "";
-		}
-		
-		String compiled = infos.compileContent().trim();
+		File cnd = new File("_lc" + counter + "_.cl2");
+		w = new FileWriter(cnd);
+		w.write("return " + infos.getCondition() + ";");
+		w.close();
 		
 		counter++;
 		
-		builder.append("mark _while_" + counter + "_start");
+		res.append(Finisher.finish(cnd));
+		res.append("\ninvoke 1\n");
+		res.append(Finisher.finish(func));
+		res.append("\ninvoke 1\nnnr");
 		
-		if(!condition.equals(SpecialResults.TRUE)){
-			//Normal
-			builder.append("\n");
-			builder.append(condition);
-			builder.append("\nif _while_" + counter + "_continue");
-			builder.append("\ngoto _while_" + counter + "_end");
-			builder.append("\nmark _while_" + counter + "_continue");
-		}else{
-			//while-true loop
-		}
-		
-		if(!compiled.isEmpty()){
-			builder.append("\nnewscope\n");
-			builder.append(compiled);
-			builder.append("\noldscope");
-		}
-		builder.append("\ngoto _while_" + counter + "_start");
-		builder.append("\nmark _while_" + counter + "_end");
-		
-		return builder.toString();
+		return res.toString();
 	}
 
 	@Override

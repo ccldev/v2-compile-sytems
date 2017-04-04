@@ -14,14 +14,12 @@ import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;
 import ccl.csy.block.FunctionBlockSystem;
 import ccl.csy.block.IfBlockSystem;
-import ccl.csy.block.NativeBlockSystem;
 import ccl.csy.block.NormalBlockSystem;
 import ccl.csy.block.WhileBlockSystem;
 import ccl.psy.IncludeSystem;
 import ccl.psy.LiteralDefineSystem;
 import ccl.psy.OperatorDefineSystem;
 import ccl.psy.SnippetSystem;
-import ccl.psy.UnsafeSystem;
 import ccl.v2_1.code.CclCode;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.Finisher;
@@ -127,8 +125,8 @@ public class CCL {
 		
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
 		CompileSystems.BLOCK.add(new FunctionBlockSystem());
-		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
+		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new ElseStub());
 		
 		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
@@ -137,7 +135,6 @@ public class CCL {
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
 		CompileSystems.PRE.add(new LiteralDefineSystem());
 		CompileSystems.PRE.add(new SnippetSystem());
-		CompileSystems.PRE.add(new UnsafeSystem());
 	}
 
 }

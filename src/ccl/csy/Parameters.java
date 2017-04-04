@@ -15,7 +15,7 @@ public class Parameters {
 			return "";
 		}
 		
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder("var parameters = @;");
 		
 		if(raw.trim().length() == 0) return "";
 		String[] params = Tool.split(raw.trim(), ',');

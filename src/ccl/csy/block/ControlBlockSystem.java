@@ -7,11 +7,9 @@ import java.io.IOException;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 import ccl.csy.StaticTodoCompiler;
-import ccl.csy.StaticValueCompiler;
 import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.err.NI;
 
 public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	
@@ -34,11 +32,6 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		w.write(infos.getContent());
 		w.close();
 		
-		//load ...
-		//{}
-		//invoke ...
-		//pop
-		
 		StringBuilder res = new StringBuilder();
 		res.append("load ");
 		res.append(infos.getKeyword());
@@ -46,13 +39,6 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
 		res.append(Finisher.finish(func));
 		res.append("\ninvoke 1\npop");
-		
-//		res.append(Finisher.finish(func));
-//		res.append("\nget ");
-//		res.append(infos.getKeyword());
-//		res.append("\n");
-//		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
-//		res.append("pop");
 		
 		return res.toString().trim();
 	}

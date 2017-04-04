@@ -1,6 +1,7 @@
 package ccl.csy.block;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import net.bplaced.opl.ccl.CompileSystem;
@@ -8,8 +9,7 @@ import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
 
 import ccl.csy.BlockTool;
-import ccl.csy.SpecialResults;
-import ccl.csy.StaticValueCompiler;
+import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
@@ -32,48 +32,40 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			throws ImplementationException, DebugException, IOException {
 		
 		elseContent = 	BlockTool.elseContent(infos);
+		
+		File onIf = new File("_i" + counter + "_.cl2");
+		FileWriter w = new FileWriter(onIf);
+		w.write(infos.getContent());
+		w.close();
+		
+		File onElse = null;
 		if(elseContent != null){
-			elseContent = 	"newscope\n" + 
-					elseContent + 
-					"\noldscope";
+			onElse = new File("_e" + counter + "_.cl0");
+			w = new FileWriter(onElse);
+			w.write(elseContent);
+			w.close();
 		}
 		
-		StringBuilder builder = new StringBuilder();
+		File cnd = new File("_ic" + counter + "_.cl2");
+		w = new FileWriter(cnd);
+		w.write("return " + infos.getCondition() + ";");
+		w.close();
 		
-		String content = infos.compileContent().trim();
+		counter++;
 		
-		String condition = StaticValueCompiler.compileValue(infos.getCondition()).trim();
-		
-		if(condition.equals(SpecialResults.FALSE)){
-			return elseContent == null ? "" : elseContent;
+		StringBuilder ret = new StringBuilder();
+		ret.append("load if\n");
+		ret.append(Finisher.finish(cnd));
+		ret.append("\ninvoke 1\n");
+		ret.append(Finisher.finish(onIf));
+		ret.append("\n");
+		if(onElse == null){
+			ret.append("load undefined");
+		}else{
+			ret.append("putM " + onElse.getName());
 		}
-		
-		if(!content.isEmpty()){
-			counter++;
-			
-			builder.append(condition);
-			
-			if(!condition.equals(SpecialResults.TRUE)){
-				builder.append("\nif _if_" + counter + "_");
-				builder.append(elseContent == null ? "" : "\n" + elseContent);
-				builder.append("\ngoto _if_" + counter + "_end_\n");
-				builder.append("mark _if_" + counter + "_");
-			}
-			builder.append("\nnewscope");
-			
-			//on if
-			if(!content.isEmpty()){
-				builder.append("\n");
-				builder.append(content);
-			}
-			
-			builder.append("\noldscope");
-			if(!condition.equals(SpecialResults.TRUE)){
-				builder.append("\nmark _if_" + counter + "_end_");
-			}
-		}
-		
-		return builder.toString();
+		ret.append("\ninvoke 2\nnnr");
+		return ret.toString();
 	}
 
 	@Override
