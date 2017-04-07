@@ -13,7 +13,7 @@ public class ArrayItem {
 	private static final Pattern ITEM_PATTERN = Pattern.compile
 			("()\\s*(.+)\\s*", Pattern.DOTALL);
 	private static final Pattern NAMED_PATTERN = Pattern.compile
-			("\\s*([a-zA-Z0-9]+)\\s*:\\s*(.+)\\s*", Pattern.DOTALL);
+			("\\s*([a-zA-Z0-9_@]+)\\s*:\\s*(.+)\\s*", Pattern.DOTALL);
 	
 	private int index;
 	private String raw;

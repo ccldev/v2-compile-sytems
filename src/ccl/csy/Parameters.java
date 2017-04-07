@@ -44,26 +44,19 @@ public class Parameters {
 				builder.append(index);
 				builder.append(")");
 			}else{
+				builder.append("parameters.getOrDefault(");
+				builder.append(index);
+				builder.append(",");
 				builder.append(value);
+				builder.append(")");
 			}
 		}else{
-			builder.append("undefined");
+			builder.append("parameters.getOrDefault(");
+			builder.append(index);
+			builder.append(",undefined)");
 		}
 		
 		builder.append(";\n");
-		
-		if(!value.equals("...")){
-			builder.append("if(");
-			builder.append(index);
-			builder.append(".lss(parameters.length())){");
-			
-			builder.append(name);
-			builder.append("=parameters.get(");
-			builder.append(index);
-			builder.append(");");
-			
-			builder.append("}");
-		}
 		
 		return builder.toString();
 		

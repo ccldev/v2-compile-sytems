@@ -9,6 +9,7 @@ import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
 
 import ccl.csy.BlockTool;
+import ccl.csy.StaticValueCompiler;
 import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
@@ -46,16 +47,16 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			w.close();
 		}
 		
-		File cnd = new File("_ic" + counter + "_.cl2");
-		w = new FileWriter(cnd);
-		w.write("return " + infos.getCondition() + ";");
-		w.close();
+//		File cnd = new File("_ic" + counter + "_.cl2");
+//		w = new FileWriter(cnd);
+//		w.write("return " + infos.getCondition() + ";");
+//		w.close();
 		
 		counter++;
 		
 		StringBuilder ret = new StringBuilder();
 		ret.append("load if\n");
-		ret.append(Finisher.finish(cnd));
+		ret.append(StaticValueCompiler.compileValue(infos.getCondition()));
 		ret.append("\ninvoke 1\n");
 		ret.append(Finisher.finish(onIf));
 		ret.append("\n");
