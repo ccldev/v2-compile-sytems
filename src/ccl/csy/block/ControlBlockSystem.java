@@ -32,6 +32,8 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		w.write(infos.getContent());
 		w.close();
 		
+		count++;
+		
 		StringBuilder res = new StringBuilder();
 		res.append("load ");
 		res.append(infos.getKeyword());
