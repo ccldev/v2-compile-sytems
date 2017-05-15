@@ -1,15 +1,17 @@
 package ccl.csy;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import cpa.subos.io.IO;
+import cpa.subos.io.IOBase;
+import cpa.subos.io.file.FileIOBase;
+import io.github.coalangsoft.lib.reflect.CustomClassFinder;
 import net.bplaced.opl.ccl.CompileSystems;
 
-import ccl.csy.VariableDeclarationSystem;
 import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;
 import ccl.csy.block.FunctionBlockSystem;
@@ -29,15 +31,17 @@ import ccl.v2_1.err.ImplementationException;
 import ccl.v2_1.pre.PreProcessor;
 
 public class CCL {
-	
-	public static File compile(boolean head, String name) throws IOException, DebugException, ImplementationException {
-		File in = new File(name);
-		File cl0 = new File(name.substring(0, name.length() - 1) + "0");
-		cl0.createNewFile();
+
+	public static CustomClassFinder classFinder;
+
+	public static FileIOBase compile(boolean head, String name) throws IOException, DebugException, ImplementationException {
+		IOBase<?> in = IO.file(name);
+		FileIOBase cl0 = IO.file(name.substring(0, name.length() - 1) + "0");
+//		cl0.createNewFile();
 		
-		PrintStream out = new PrintStream(cl0);
+		PrintStream out = new PrintStream(cl0.writer());
 		
-		String content = preProcess(head, readFileContent(in));
+		String content = preProcess(head, in.buildString());
 		
 		CclCode code = new CclCode(content);
 		CclCodePart[] parts = null;
@@ -88,16 +92,16 @@ public class CCL {
 		return CCL.class.getResourceAsStream(res);
 	}
 
-	private static String readFileContent(File f) throws FileNotFoundException {
-		Scanner s = new Scanner(f);
-		StringBuilder builder = new StringBuilder();
-		while(s.hasNextLine()){
-			builder.append(s.nextLine());
-			builder.append("\n");
-		}
-		s.close();
-		return builder.toString();
-	}
+//	private static String readFileContent(File f) throws FileNotFoundException {
+//		Scanner s = new Scanner(f);
+//		StringBuilder builder = new StringBuilder();
+//		while(s.hasNextLine()){
+//			builder.append(s.nextLine());
+//			builder.append("\n");
+//		}
+//		s.close();
+//		return builder.toString();
+//	}
 	
 	private static String readContent(InputStream stream){
 		Scanner s = new Scanner(stream);
