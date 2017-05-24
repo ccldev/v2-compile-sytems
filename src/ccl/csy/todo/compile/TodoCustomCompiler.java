@@ -48,13 +48,17 @@ public class TodoCustomCompiler implements RawValueCompiler {
 			builder.append("\n");
 		}
 
-		builder.append("get bind\n");
-		//operator.bind
-		builder.append("invoke1 1\n");
-		//operator.bind(a)
-		builder.append(StaticValueCompiler.compileValue(value));
-		builder.append("\ninvoke 1");
-		//operator.bind(a)(b)
+		if(value.trim().isEmpty()){
+			builder.append("invoke1 1");
+		}else{
+			builder.append("get bind\n");
+			//operator.bind
+			builder.append("invoke1 1\n");
+			//operator.bind(a)
+			builder.append(StaticValueCompiler.compileValue(value));
+			builder.append("\ninvoke 1");
+			//operator.bind(a)(b)
+		}
 
 		return builder.toString();
 	}
