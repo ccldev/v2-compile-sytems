@@ -50,9 +50,7 @@ public class CCL {
 		}catch(Exception e){
 			new DebugHelper(code.getRaw()).consume(e);
 		}
-		
-		out.println("sPut " + name);
-		
+
 		for(int i = 0; i < parts.length; i++){
 			try {
 				String c = parts[i].compile(i + 1 < parts.length ? parts[i+1] : null);
@@ -64,9 +62,7 @@ public class CCL {
 				new DebugHelper(parts[i]).consume(e);
 			}
 		}
-		
-		out.println("sPop");
-		
+
 		out.close();
 		
 		return cl0;
