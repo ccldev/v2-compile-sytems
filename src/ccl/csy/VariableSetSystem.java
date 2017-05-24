@@ -26,7 +26,15 @@ public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{
 			throws ImplementationException, DebugException, IOException {
 		Matcher m = SET_PATTERN.matcher(infos.getRaw());
 		m.matches();
-		return "load " + m.group(1) + "\n" +
+
+		String name;
+
+		String alias = Alias.lookup(name = m.group(1));
+		if(alias != null){
+			name = alias;
+		}
+
+		return "load " + name + "\n" +
 				StaticValueCompiler.compileValue(m.group(2)) +
 				"\nstore";
 	}

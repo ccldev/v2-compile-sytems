@@ -1,7 +1,7 @@
 package ccl.csy.todo.compile;
 
+import ccl.csy.Alias;
 import ccl.csy.Constants;
-import ccl.csy.Operators;
 import ccl.csy.StaticValueCompiler;
 import ccl.csy.value.compile.RawValueCompiler;
 import ccl.v2_1.err.DebugException;
@@ -33,39 +33,29 @@ public class TodoCustomCompiler implements RawValueCompiler {
 			}
 		}
 		String value = val.substring(op.length()).trim();
-		if(abcOp){
-			return buildResult(abcOp, op, value.trim());
-		}else{
-			return buildResult(abcOp, Operators.lookup(op), value.trim());
-		}
+		return buildResult(op, value.trim());
 	}
 
-	private String buildResult(boolean abcOp, String opMethod, String value) throws DebugException, ImplementationException {
+	private String buildResult(String opMethod, String value) throws DebugException, ImplementationException {
 		StringBuilder builder = new StringBuilder();
 
-		if(abcOp){
+		String alias = Alias.lookup(opMethod);
+		if(alias != null){
+			builder.append(StaticValueCompiler.compileValue(alias) + "\n");
+		}else{
 			builder.append("load ");
 			builder.append(opMethod);
-			builder.append("\nget bind\n");
-			//operator.bind
-			builder.append("invoke1 1\n");
-			//operator.bind(a)
-			builder.append(StaticValueCompiler.compileValue(value));
-			builder.append("\ninvoke 1");
-			//operator.bind(a)(b)
-
-			return builder.toString();
+			builder.append("\n");
 		}
 
-		builder.append("get ");
-		builder.append(opMethod);
-		builder.append("\n");
-		if(!value.isEmpty()){
-			builder.append(StaticValueCompiler.compileValue(value));
-			builder.append("\ninvoke 1");
-		}else{
-			builder.append("invoke 0");
-		}
+		builder.append("get bind\n");
+		//operator.bind
+		builder.append("invoke1 1\n");
+		//operator.bind(a)
+		builder.append(StaticValueCompiler.compileValue(value));
+		builder.append("\ninvoke 1");
+		//operator.bind(a)(b)
+
 		return builder.toString();
 	}
 

@@ -1,15 +1,16 @@
 package ccl.csy;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import ccl.psy.AliasSystem;
 import cpa.subos.io.IO;
 import cpa.subos.io.IOBase;
 import cpa.subos.io.file.FileIOBase;
 import io.github.coalangsoft.lib.reflect.CustomClassFinder;
+import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
@@ -20,7 +21,6 @@ import ccl.csy.block.NormalBlockSystem;
 import ccl.csy.block.WhileBlockSystem;
 import ccl.psy.IncludeSystem;
 import ccl.psy.LiteralDefineSystem;
-import ccl.psy.OperatorDefineSystem;
 import ccl.psy.SnippetSystem;
 import ccl.v2_1.code.CclCode;
 import ccl.v2_1.code.CclCodePart;
@@ -134,11 +134,11 @@ public class CCL {
 		CompileSystems.BLOCK.add(new ElseStub());
 		
 		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
-		
-		CompileSystems.PRE.add(new OperatorDefineSystem());
+
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
 		CompileSystems.PRE.add(new LiteralDefineSystem());
 		CompileSystems.PRE.add(new SnippetSystem());
+		CompileSystems.PRE.add(new AliasSystem());
 	}
 
 }

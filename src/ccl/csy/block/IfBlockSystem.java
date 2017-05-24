@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import ccl.csy.Constants;
+import ccl.csy.SpecialResults;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 
@@ -31,8 +33,17 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 	@Override
 	public String compileComplete(CclCodeBlock infos)
 			throws ImplementationException, DebugException, IOException {
-		
+
+		String condition = StaticValueCompiler.compileValue(infos.getCondition()).trim();
+
 		elseContent = 	BlockTool.elseContent(infos);
+		if(condition.equals(SpecialResults.FALSE)){
+			if(elseContent == null){
+				return "";
+			}else{
+				return "newscope\n" + elseContent + "\noldscope";
+			}
+		}
 		
 		File onIf = new File("_i" + counter + "_.cl2");
 		FileWriter w = new FileWriter(onIf);
@@ -46,11 +57,6 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 			w.write(elseContent);
 			w.close();
 		}
-		
-//		File cnd = new File("_ic" + counter + "_.cl2");
-//		w = new FileWriter(cnd);
-//		w.write("return " + infos.getCondition() + ";");
-//		w.close();
 		
 		counter++;
 		

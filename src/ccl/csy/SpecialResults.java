@@ -2,8 +2,8 @@ package ccl.csy;
 
 public interface SpecialResults {
 
-	String FALSE = "load false";
-	String TRUE = "load true";
+	String FALSE = "putI 0";
+	String TRUE = "putI 1";
 	
 	
 	
