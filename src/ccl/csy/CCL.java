@@ -115,7 +115,6 @@ public class CCL {
 		
 		CompileSystems.SNIPPET.add(new EmptyVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
-		CompileSystems.SNIPPET.add(new ArrayVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new TupleVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableSetSystem());
 		CompileSystems.SNIPPET.add(new ReturnCompileSystem());
