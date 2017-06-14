@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ccl.csy.Alias;
+import ccl.csy.context.Alias;
 import net.bplaced.opl.ccl.CompileSystem;
 
 import ccl.v2_1.err.DebugException;

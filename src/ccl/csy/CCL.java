@@ -6,16 +6,18 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import ccl.psy.AliasSystem;
+import coa.rt.compiler.systems.AssemblerBlockSystem;
+import coa.rt.compiler.systems.AssemblerIncludeSystem;
+import coa.rt.compiler.systems.BlockDefineSystem;
+import cpa.subos.io.BufferIOBase;
 import cpa.subos.io.IO;
 import cpa.subos.io.IOBase;
 import cpa.subos.io.file.FileIOBase;
 import io.github.coalangsoft.lib.reflect.CustomClassFinder;
-import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;
-import ccl.csy.block.FunctionBlockSystem;
 import ccl.csy.block.IfBlockSystem;
 import ccl.csy.block.NormalBlockSystem;
 import ccl.csy.block.WhileBlockSystem;
@@ -34,15 +36,20 @@ public class CCL {
 
 	public static CustomClassFinder classFinder;
 
-	public static FileIOBase compile(boolean head, String name) throws IOException, DebugException, ImplementationException {
-		IOBase<?> in = IO.file(name);
-		FileIOBase cl0 = IO.file(name.substring(0, name.length() - 1) + "0");
-//		cl0.createNewFile();
-		
+	public static FileIOBase compile(boolean head, String fname) throws DebugException, IOException, ImplementationException {
+		BufferIOBase rawResult = compile(head, IO.file(fname));
+		FileIOBase out = IO.file(fname.substring(0, fname.length() - 1) + '0');
+		out.downloadFrom(rawResult);
+		return out;
+	}
+
+	public static BufferIOBase compile(boolean head, IOBase<?> in) throws IOException, DebugException, ImplementationException {
+		BufferIOBase cl0 = IO.buffer();
+
 		PrintStream out = new PrintStream(cl0.writer());
-		
+
 		String content = preProcess(head, in.buildString());
-		
+
 		CclCode code = new CclCode(content);
 		CclCodePart[] parts = null;
 		try {
@@ -115,7 +122,6 @@ public class CCL {
 		
 		CompileSystems.SNIPPET.add(new EmptyVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableDeclarationSystem());
-		CompileSystems.SNIPPET.add(new TupleVariableDeclarationSystem());
 		CompileSystems.SNIPPET.add(new VariableSetSystem());
 		CompileSystems.SNIPPET.add(new ReturnCompileSystem());
 		CompileSystems.SNIPPET.add(new ThrowSystem());
@@ -123,17 +129,19 @@ public class CCL {
 		CompileSystems.SNIPPET.setDefault(new DefaultSystem());
 		
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
-		CompileSystems.BLOCK.add(new FunctionBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
 		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new ElseStub());
-		
+		CompileSystems.BLOCK.add(new AssemblerBlockSystem());
+
 		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
 
 		CompileSystems.PRE.add(new IncludeSystem(libPrefix));
 		CompileSystems.PRE.add(new LiteralDefineSystem());
 		CompileSystems.PRE.add(new SnippetSystem());
 		CompileSystems.PRE.add(new AliasSystem());
+		CompileSystems.PRE.add(new BlockDefineSystem());
+		CompileSystems.PRE.add(new AssemblerIncludeSystem());
 	}
 
 }

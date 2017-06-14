@@ -1,8 +1,7 @@
 package ccl.csy.value.compile;
 
-import ccl.csy.Alias;
+import ccl.csy.context.Alias;
 import ccl.csy.StaticValueCompiler;
-import ccl.csy.value.ValueCompiler;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 

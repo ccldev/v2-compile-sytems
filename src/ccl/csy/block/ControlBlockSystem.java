@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import ccl.csy.StaticValueCompiler;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeBlock;
 import ccl.csy.StaticTodoCompiler;
@@ -35,12 +36,11 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		count++;
 		
 		StringBuilder res = new StringBuilder();
-		res.append("load ");
-		res.append(infos.getKeyword());
+		res.append(StaticValueCompiler.compileValue(infos.getKeyword()));
 		res.append("\n");
 		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
 		res.append(Finisher.finish(func));
-		res.append("\ninvoke 1\nnnr");
+		res.append("\ninvoke 1");
 		
 		return res.toString().trim();
 	}

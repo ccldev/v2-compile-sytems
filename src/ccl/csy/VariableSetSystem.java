@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ccl.csy.context.Alias;
 import net.bplaced.opl.ccl.CompileSystem;
 import net.bplaced.opl.ccl.cat.CclCodeSnippet;
 

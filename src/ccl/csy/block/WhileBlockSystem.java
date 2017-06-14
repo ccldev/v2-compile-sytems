@@ -46,7 +46,7 @@ public class WhileBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		res.append(Finisher.finish(cnd));
 		res.append("\ninvoke 1\n");
 		res.append(Finisher.finish(func));
-		res.append("\ninvoke 1\nnnr");
+		res.append("\ninvoke 1");
 		
 		return res.toString();
 	}

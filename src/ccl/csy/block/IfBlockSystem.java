@@ -71,7 +71,7 @@ public class IfBlockSystem implements CompileSystem<CclCodeBlock, File> {
 		}else{
 			ret.append("putM " + onElse.getName());
 		}
-		ret.append("\ninvoke 2\nnnr");
+		ret.append("\ninvoke 2");
 		return ret.toString();
 	}
 

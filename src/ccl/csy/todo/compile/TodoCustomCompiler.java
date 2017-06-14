@@ -1,6 +1,6 @@
 package ccl.csy.todo.compile;
 
-import ccl.csy.Alias;
+import ccl.csy.context.Alias;
 import ccl.csy.Constants;
 import ccl.csy.StaticValueCompiler;
 import ccl.csy.value.compile.RawValueCompiler;

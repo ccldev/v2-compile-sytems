@@ -13,6 +13,8 @@ public class Parameters {
 	public static String parseParameters(String raw) {
 		if(raw == null){
 			return "";
+		}if(raw.trim().isEmpty()){
+			return "";
 		}
 		
 		StringBuilder builder = new StringBuilder("var parameters = @;");

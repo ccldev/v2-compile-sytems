@@ -3,7 +3,6 @@ package ccl.csy.value;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-
 import ccl.csy.value.compile.RawValueCompiler;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
@@ -14,12 +13,12 @@ public class ValueType implements IValueTypes{
 		list = new ArrayList<ValueType>();
 		
 		register(ARRAY);
-		register(FUNC_LITERAL);
 		register(NUMBER);
 		register(REGEX);
 		register(STRING);
 		register(VARIABLE);
 		register(UNBOUND);
+
 	}
 	
 	private static ArrayList<ValueType> list;
