@@ -6,15 +6,15 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import ccl.psy.AliasSystem;
-import coa.rt.compiler.systems.AssemblerBlockSystem;
-import coa.rt.compiler.systems.AssemblerIncludeSystem;
-import coa.rt.compiler.systems.BlockDefineSystem;
+import coa.compiler.systems.AssemblerBlockSystem;
+import coa.compiler.systems.AssemblerIncludeSystem;
+import coa.compiler.systems.BlockDefineSystem;
 import cpa.subos.io.BufferIOBase;
 import cpa.subos.io.IO;
 import cpa.subos.io.IOBase;
 import cpa.subos.io.file.FileIOBase;
 import io.github.coalangsoft.lib.reflect.CustomClassFinder;
-import net.bplaced.opl.ccl.CompileSystems;
+import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.ElseStub;
@@ -88,7 +88,9 @@ public class CCL {
 			processor.process(s.nextLine());
 		}
 		s.close();
-		return processor.get();
+
+		String result = processor.get();
+		return processor.insertSemicolons(result);
 	}
 
 	private static InputStream get(String res) {

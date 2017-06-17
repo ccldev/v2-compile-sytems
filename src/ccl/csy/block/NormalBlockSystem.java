@@ -1,16 +1,14 @@
 package ccl.csy.block;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ccl.csy.Parameters;
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
-import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 

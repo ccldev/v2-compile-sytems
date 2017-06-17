@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import ccl.csy.Constants;
 import ccl.csy.SpecialResults;
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 
 import ccl.csy.BlockTool;

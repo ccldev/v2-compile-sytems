@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 import ccl.v2_1.compile.Finisher;
 import ccl.v2_1.err.DebugException;

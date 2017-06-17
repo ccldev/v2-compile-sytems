@@ -1,13 +1,12 @@
-package coa.rt.compiler.systems;
+package coa.compiler.systems;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by Matthias on 14.06.2017.

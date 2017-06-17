@@ -2,7 +2,7 @@ package ccl.csy;
 
 import java.io.IOException;
 
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;

@@ -3,8 +3,8 @@ package ccl.csy;
 import java.io.File;
 
 
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;

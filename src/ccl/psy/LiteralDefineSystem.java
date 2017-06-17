@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 import ccl.csy.value.ValueType;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import net.bplaced.opl.ccl.CompileSystem;
+import io.github.coalangsoft.cclproject.CompileSystem;
 
 public class LiteralDefineSystem implements CompileSystem<String, Void>{
 
 	private static final Pattern LITDEF_PATTERN = Pattern.compile
-			("\\s*#\\s*literal\\s+([^\\s]{1,2})\\s+(.+)\\s*");
+			("\\s*#\\s*literal\\s+([^\\s]+)\\s+(.+)\\s*");
 	
 	@Override
 	public boolean accept(String infos) {
@@ -29,15 +29,23 @@ public class LiteralDefineSystem implements CompileSystem<String, Void>{
 		String identifier = m.group(1);
 		if(identifier.length() == 1){
 			ValueType.register(new ValueType(
-				identifier.charAt(0), new LiteralCompiler(result)
+				identifier.charAt(0), new BasicLiteralCompiler(result)
 			));
 			return "";
-		}else{
+		}else if(identifier.length() == 2){
 			ValueType.register(new ValueType(
 					identifier.charAt(0), identifier.charAt(1),
-					new LiteralCompiler(result)
+					new BasicLiteralCompiler(result)
 				));
 				return "";
+		}else{
+			char opener = identifier.charAt(0);
+			char closer = identifier.charAt(identifier.length() - 1);
+			ValueType.register(new ValueType(
+					opener, closer,
+					new ComplexLiteralCompiler(identifier, result)
+			));
+			return "";
 		}
 	}
 

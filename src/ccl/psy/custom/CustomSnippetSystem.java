@@ -10,8 +10,8 @@ import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeSnippet;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
 public class CustomSnippetSystem implements CompileSystem<CclCodeSnippet, File> {
 

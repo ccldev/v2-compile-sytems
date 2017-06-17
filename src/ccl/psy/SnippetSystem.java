@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import ccl.psy.custom.CustomSnippetSystem;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.CompileSystems;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.CompileSystems;
 
 public class SnippetSystem implements CompileSystem<String, Void>{
 

@@ -1,9 +1,9 @@
-package coa.rt.compiler.systems;
+package coa.compiler.systems;
 
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import cpa.subos.io.IO;
-import net.bplaced.opl.ccl.CompileSystem;
+import io.github.coalangsoft.cclproject.CompileSystem;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

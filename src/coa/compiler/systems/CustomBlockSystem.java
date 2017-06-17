@@ -1,16 +1,14 @@
-package coa.rt.compiler.systems;
+package coa.compiler.systems;
 
 import ccl.csy.CCL;
-import ccl.csy.StaticValueCompiler;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import cpa.subos.io.IO;
-import net.bplaced.opl.ccl.CompileSystem;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.CompileSystem;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

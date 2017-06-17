@@ -5,11 +5,11 @@ import ccl.csy.value.compile.RawValueCompiler;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
-public class LiteralCompiler implements RawValueCompiler {
+public class BasicLiteralCompiler implements RawValueCompiler {
 
 	private String resultFormat;
 
-	public LiteralCompiler(String resultFormat) {
+	public BasicLiteralCompiler(String resultFormat) {
 		this.resultFormat = resultFormat;
 	}
 

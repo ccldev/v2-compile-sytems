@@ -4,11 +4,7 @@ import ccl.csy.StaticTodoCompiler;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
-import ccl.v2_1.layers.LayerState;
-import ccl.v2_1.layers.LayerSystem;
-import ccl.v2_1.operators.Operators;
-import net.bplaced.opl.ccl.CompileSystems;
-import net.bplaced.opl.ccl.cat.CclCodeBlock;
+import io.github.coalangsoft.cclproject.cat.CclCodeBlock;
 
 import java.io.IOException;
 
