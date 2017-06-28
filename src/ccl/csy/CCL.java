@@ -17,7 +17,6 @@ import io.github.coalangsoft.lib.reflect.CustomClassFinder;
 import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
-import ccl.csy.block.ElseStub;
 import ccl.csy.block.IfBlockSystem;
 import ccl.csy.block.NormalBlockSystem;
 import ccl.csy.block.WhileBlockSystem;
@@ -133,7 +132,6 @@ public class CCL {
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
 		CompileSystems.BLOCK.add(new WhileBlockSystem());
 		CompileSystems.BLOCK.add(new IfBlockSystem());
-		CompileSystems.BLOCK.add(new ElseStub());
 		CompileSystems.BLOCK.add(new AssemblerBlockSystem());
 
 		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
