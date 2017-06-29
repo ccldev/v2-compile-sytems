@@ -17,9 +17,7 @@ import io.github.coalangsoft.lib.reflect.CustomClassFinder;
 import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
-import ccl.csy.block.IfBlockSystem;
 import ccl.csy.block.NormalBlockSystem;
-import ccl.csy.block.WhileBlockSystem;
 import ccl.psy.IncludeSystem;
 import ccl.psy.LiteralDefineSystem;
 import ccl.psy.SnippetSystem;
@@ -95,17 +93,6 @@ public class CCL {
 	private static InputStream get(String res) {
 		return CCL.class.getResourceAsStream(res);
 	}
-
-//	private static String readFileContent(File f) throws FileNotFoundException {
-//		Scanner s = new Scanner(f);
-//		StringBuilder builder = new StringBuilder();
-//		while(s.hasNextLine()){
-//			builder.append(s.nextLine());
-//			builder.append("\n");
-//		}
-//		s.close();
-//		return builder.toString();
-//	}
 	
 	private static String readContent(InputStream stream){
 		Scanner s = new Scanner(stream);
@@ -130,8 +117,6 @@ public class CCL {
 		CompileSystems.SNIPPET.setDefault(new DefaultSystem());
 		
 		CompileSystems.BLOCK.add(new NormalBlockSystem());
-		CompileSystems.BLOCK.add(new WhileBlockSystem());
-		CompileSystems.BLOCK.add(new IfBlockSystem());
 		CompileSystems.BLOCK.add(new AssemblerBlockSystem());
 
 		CompileSystems.BLOCK.setDefault(new ControlBlockSystem());
