@@ -18,7 +18,7 @@ public class UnboundValueCompiler implements RawValueCompiler {
 		
 		return 	"load unbound" + 
 				"\nputS " + m.group(1) + 
-				"\ninvoke 1";
+				"\n__invoke1";
 	}
 
 }

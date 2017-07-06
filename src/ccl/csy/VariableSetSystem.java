@@ -35,9 +35,8 @@ public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{
 			name = alias;
 		}
 
-		return "load " + name + "\n" +
-				StaticValueCompiler.compileValue(m.group(2)) +
-				"\nstore";
+		return 	StaticValueCompiler.compileValue(m.group(2)) +
+				"\n__setvar " + m.group(1);
 	}
 
 	@Override

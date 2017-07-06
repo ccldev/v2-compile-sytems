@@ -49,7 +49,7 @@ public class NormalBlockSystem implements CompileSystem<CclCodeBlock, File>{
 	public String include() {
 		String res = "putM _nblock_" + count + "_.cl0";
 		if(!parameters){
-			return res + "\nduplicate\ninvoke 0\nnnr";
+			return res + "\nduplicate\n__invoke0\nnnr";
 		}
 		return res;
 	}

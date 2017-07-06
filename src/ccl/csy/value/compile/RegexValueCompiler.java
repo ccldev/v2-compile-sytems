@@ -13,7 +13,7 @@ public class RegexValueCompiler implements RawValueCompiler {
 		StringBuilder b = new StringBuilder();
 		b.append("load regex\nputS ");
 		b.append(regex);
-		b.append("\ninvoke 1");
+		b.append("\n__invoke1");
 		
 		return b.toString();
 	}

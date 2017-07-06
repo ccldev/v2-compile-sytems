@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import ccl.psy.custom.CustomSnippetSystem;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 import io.github.coalangsoft.cclproject.CompileSystem;

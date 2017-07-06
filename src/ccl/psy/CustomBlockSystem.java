@@ -1,4 +1,4 @@
-package coa.compiler.systems;
+package ccl.psy;
 
 import ccl.csy.CCL;
 import ccl.v2_1.err.DebugException;

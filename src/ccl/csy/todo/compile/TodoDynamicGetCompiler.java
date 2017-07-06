@@ -15,7 +15,7 @@ public class TodoDynamicGetCompiler implements RawValueCompiler {
 		StringBuilder b = new StringBuilder();
 		b.append("get property\n");
 		b.append(StaticValueCompiler.compileValue(raw));
-		b.append("\ninvoke 1");
+		b.append("\n__invoke1");
 		
 		return b.toString();		
 	}

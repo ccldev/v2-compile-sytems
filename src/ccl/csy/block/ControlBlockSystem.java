@@ -40,7 +40,7 @@ public class ControlBlockSystem implements CompileSystem<CclCodeBlock, File>{
 		res.append("\n");
 		res.append(StaticTodoCompiler.compileTodo("(" + infos.getCondition() + ")"));
 		res.append(Finisher.finish(func));
-		res.append("\ninvoke 1\nnnr2");
+		res.append("\n__invoke1\nnnr2");
 		
 		return res.toString().trim();
 	}

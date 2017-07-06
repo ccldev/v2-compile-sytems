@@ -31,7 +31,7 @@ public class EmptyVariableDeclarationSystem implements CompileSystem<CclCodeSnip
 		StringBuilder b = new StringBuilder();
 		
 		for(int i = 0; i < split.length; i++){
-			b.append("reserve " + split[i].trim() + "\npop");
+			b.append("__mkvar_u " + split[i].trim());
 			if(i < split.length - 1){
 				b.append("\n");
 			}

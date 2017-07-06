@@ -36,14 +36,12 @@ public class ArrayItem {
 	public String compile() throws DebugException, ImplementationException {
 		analyze();
 		StringBuilder builder = new StringBuilder();
-		
-		builder.append("get push\n");
+
 		builder.append(StaticValueCompiler.compileValue(value));
 		if(!name.isEmpty()){
-			builder.append("\nputS " + name);
-			builder.append("\ninvoke 2");
+			builder.append("\n__arrpush2 " + name);
 		}else{
-			builder.append("\ninvoke 1");
+			builder.append("\n__arrpush1");
 		}
 		return builder.toString();
 	}

@@ -6,9 +6,9 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import ccl.psy.AliasSystem;
-import coa.compiler.systems.AssemblerBlockSystem;
-import coa.compiler.systems.AssemblerIncludeSystem;
-import coa.compiler.systems.BlockDefineSystem;
+import ccl.csy.block.AssemblerBlockSystem;
+import ccl.psy.AssemblerIncludeSystem;
+import ccl.psy.BlockDefineSystem;
 import cpa.subos.io.BufferIOBase;
 import cpa.subos.io.IO;
 import cpa.subos.io.IOBase;
