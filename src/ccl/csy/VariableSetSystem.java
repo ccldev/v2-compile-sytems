@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ccl.csy.context.Alias;
+import ccl.csy.context.GlobalSettings;
 import io.github.coalangsoft.cclproject.CompileSystem;
 import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
@@ -33,6 +34,10 @@ public class VariableSetSystem implements CompileSystem<CclCodeSnippet, File>{
 		String alias = Alias.lookup(name = m.group(1));
 		if(alias != null){
 			name = alias;
+		}
+
+		if(!GlobalSettings.changedVariables.contains(m.group(1))){
+			GlobalSettings.changedVariables.add(m.group(1));
 		}
 
 		return 	StaticValueCompiler.compileValue(m.group(2)) +

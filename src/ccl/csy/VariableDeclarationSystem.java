@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ccl.csy.context.GlobalSettings;
 import io.github.coalangsoft.cclproject.CompileSystem;
 import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
@@ -30,7 +31,11 @@ public class VariableDeclarationSystem implements CompileSystem<CclCodeSnippet, 
 			return "__mkvar_u " + m.group(1);
 //			return "reserve " + m.group(1) + "\npop";
 		}
-		
+
+		if(!GlobalSettings.changedVariables.contains(m.group(1))){
+			GlobalSettings.changedVariables.add(m.group(1));
+		}
+
 		String base = StaticValueCompiler.compileValue(m.group(2)) +
 				"\n__mkvar " + m.group(1);
 		return base;

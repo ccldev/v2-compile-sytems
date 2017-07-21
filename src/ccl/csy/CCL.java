@@ -3,24 +3,26 @@ package ccl.csy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import ccl.psy.AliasSystem;
+import ccl.csy.context.GlobalSettings;
+import ccl.psy.*;
 import ccl.csy.block.AssemblerBlockSystem;
-import ccl.psy.AssemblerIncludeSystem;
-import ccl.psy.BlockDefineSystem;
 import cpa.subos.io.BufferIOBase;
 import cpa.subos.io.IO;
 import cpa.subos.io.IOBase;
 import cpa.subos.io.file.FileIOBase;
+import io.github.coalangsoft.cclproject.opt.Instruction;
+import io.github.coalangsoft.cclproject.opt.InstructionOptimizer;
+import io.github.coalangsoft.cclproject.opt.InstructionReader;
+import io.github.coalangsoft.cclproject.opt.SystemChange;
 import io.github.coalangsoft.lib.reflect.CustomClassFinder;
 import io.github.coalangsoft.cclproject.CompileSystems;
 
 import ccl.csy.block.ControlBlockSystem;
 import ccl.csy.block.NormalBlockSystem;
-import ccl.psy.IncludeSystem;
-import ccl.psy.LiteralDefineSystem;
-import ccl.psy.SnippetSystem;
 import ccl.v2_1.code.CclCode;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.compile.Finisher;
@@ -37,6 +39,7 @@ public class CCL {
 		BufferIOBase rawResult = compile(head, IO.file(fname));
 		FileIOBase out = IO.file(fname.substring(0, fname.length() - 1) + '0');
 		out.downloadFrom(rawResult);
+		GlobalSettings.outputFiles.add(out.getName());
 		return out;
 	}
 
@@ -68,7 +71,7 @@ public class CCL {
 		}
 
 		out.close();
-		
+
 		return cl0;
 	}
 
@@ -106,6 +109,16 @@ public class CCL {
 	}
 	
 	public static void initSystems(boolean head, String libPrefix) {
+		IO.file(libPrefix).listFilesDeep().forEach((f) -> {
+			String name = f.getPath();
+			if(name.endsWith(".cl2") || name.endsWith(".ccl")){
+				if(!f.getName().startsWith("_")){
+					GlobalSettings.libFiles.add(name);
+				}
+			}
+			return null;
+		});
+
 		Finisher.set(new FinisherImpl(head));
 		
 		CompileSystems.SNIPPET.add(new EmptyVariableDeclarationSystem());
