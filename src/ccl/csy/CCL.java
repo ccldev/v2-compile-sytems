@@ -18,6 +18,7 @@ import io.github.coalangsoft.cclproject.opt.Instruction;
 import io.github.coalangsoft.cclproject.opt.InstructionOptimizer;
 import io.github.coalangsoft.cclproject.opt.InstructionReader;
 import io.github.coalangsoft.cclproject.opt.SystemChange;
+import io.github.coalangsoft.lib.log.TimeLogger;
 import io.github.coalangsoft.lib.reflect.CustomClassFinder;
 import io.github.coalangsoft.cclproject.CompileSystems;
 
@@ -40,6 +41,30 @@ public class CCL {
 		FileIOBase out = IO.file(fname.substring(0, fname.length() - 1) + '0');
 		out.downloadFrom(rawResult);
 		GlobalSettings.outputFiles.add(out.getName());
+
+		IOBase<?> missingVariables = IO.buffer();
+
+		for(int i = 0; i < GlobalSettings.usedVariables.size(); i++){
+			if(!GlobalSettings.changedVariables.contains(GlobalSettings.usedVariables.get(i)) && !GlobalSettings.builtinVariables.contains(GlobalSettings.usedVariables.get(i))){
+				try {
+					PreProcessor p = new PreProcessor();
+					p.process("#use " + GlobalSettings.usedVariables.get(i));
+					missingVariables.writeString(p.get());
+				}catch(Exception e){
+					TimeLogger.err.log("Warning: Variable used but not set: " + GlobalSettings.usedVariables.get(i));
+				}
+			}
+		}
+
+		String libraries = missingVariables.buildString().trim();
+		if(!libraries.isEmpty()){
+			IOBase<?> compiledLibs = compile(false, IO.string(libraries));
+			IOBase<?> newOut = IO.buffer();
+			newOut.downloadFrom(compiledLibs);
+			newOut.downloadFrom(out);
+			out.downloadFrom(newOut);
+		}
+
 		return out;
 	}
 
@@ -140,6 +165,8 @@ public class CCL {
 		CompileSystems.PRE.add(new AliasSystem());
 		CompileSystems.PRE.add(new BlockDefineSystem());
 		CompileSystems.PRE.add(new AssemblerIncludeSystem());
+		CompileSystems.PRE.add(new UseSystem());
+		CompileSystems.PRE.add(new BuiltinSystem());
 	}
 
 }

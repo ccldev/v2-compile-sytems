@@ -18,6 +18,7 @@ public class GlobalSettings {
     public static ArrayList<String> changedVariables = new ArrayList<String>();
     public static ArrayList<String> outputFiles = new ArrayList<String>();
     public static ArrayList<String> libFiles = new ArrayList<String>();
+    public static ArrayList<String> builtinVariables = new ArrayList<>();
 
     public static void optimize() throws IOException {
         //Optimize
