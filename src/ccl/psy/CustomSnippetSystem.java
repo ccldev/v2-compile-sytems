@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ccl.csy.CCL;
 import ccl.v2_1.code.CclCodePart;
 import ccl.v2_1.err.DebugException;
 import ccl.v2_1.err.ImplementationException;
 
+import cpa.subos.io.IO;
 import io.github.coalangsoft.cclproject.CompileSystem;
 import io.github.coalangsoft.cclproject.cat.CclCodeSnippet;
 
@@ -38,7 +40,7 @@ public class CustomSnippetSystem implements CompileSystem<CclCodeSnippet, File> 
 			groups.add(m.group(i + 1));
 		}
 		String code = String.format(result, groups.toArray());
-		return new CclCodePart(code).compile(null);
+		return CCL.compile(false, IO.string(code)).buildString().trim();
 	}
 
 	@Override
