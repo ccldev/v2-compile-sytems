@@ -23,11 +23,7 @@ public class GlobalSettings {
     public static void optimize() throws IOException {
         //Optimize
         SystemChange change = new SystemChange();
-        change.setForChanged(GlobalSettings.changedVariables.contains("for"));
-        change.setIfChanged(GlobalSettings.changedVariables.contains("if"));
-        change.setJavaChanged(GlobalSettings.changedVariables.contains("java"));
-        change.setPrintlnChanged(GlobalSettings.changedVariables.contains("println"));
-        change.setWhileChanged(GlobalSettings.changedVariables.contains("while"));
+        change.modifyAll(changedVariables);
 
         System.out.println(change);
 
