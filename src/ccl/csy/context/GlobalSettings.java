@@ -20,7 +20,7 @@ public class GlobalSettings {
     public static ArrayList<String> libFiles = new ArrayList<String>();
     public static ArrayList<String> builtinVariables = new ArrayList<>();
 
-    public static void optimize() throws IOException {
+    public static void optimize(boolean optimizeVariables) throws IOException {
         //Optimize
         SystemChange change = new SystemChange();
         change.modifyAll(changedVariables);
@@ -31,7 +31,7 @@ public class GlobalSettings {
             IOBase<?> cl0 = IO.file(outputFiles.get(i));
 
             ArrayList<Instruction> is = InstructionReader.read(cl0.reader());
-            InstructionOptimizer.DEFAULT.optimize(change, is);
+            InstructionOptimizer.DEFAULT.optimize(optimizeVariables, change, is);
             cl0 = IO.buffer();
 
             OutputStream stream;
