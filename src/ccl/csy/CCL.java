@@ -56,7 +56,7 @@ public class CCL {
 			}
 		}
 
-		String libraries = missingVariables.buildString().trim();
+		String libraries = missingVariables.buildString("UTF-8").trim();
 		if(!libraries.isEmpty()){
 			IOBase<?> compiledLibs = compile(false, IO.string(libraries));
 			IOBase<?> newOut = IO.buffer();
@@ -73,7 +73,7 @@ public class CCL {
 
 		PrintStream out = new PrintStream(cl0.writer());
 
-		String content = preProcess(head, in.buildString());
+		String content = preProcess(head, in.buildString("UTF-8"));
 
 		CclCode code = new CclCode(content);
 		CclCodePart[] parts = null;

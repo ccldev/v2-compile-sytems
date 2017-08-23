@@ -56,7 +56,7 @@ public class CustomBlockSystem implements CompileSystem<CclCodeBlock, File> {
 
         return CCL.compile(false, IO.string(
                 String.format(replacement, formatData)
-        )).buildString().trim() + "\nload undefined";
+        )).buildString("UTF-8").trim() + "\nload undefined";
     }
 
     @Override

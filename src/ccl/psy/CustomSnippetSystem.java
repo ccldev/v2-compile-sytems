@@ -40,7 +40,7 @@ public class CustomSnippetSystem implements CompileSystem<CclCodeSnippet, File> 
 			groups.add(m.group(i + 1));
 		}
 		String code = String.format(result, groups.toArray());
-		return CCL.compile(false, IO.string(code)).buildString().trim();
+		return CCL.compile(false, IO.string(code)).buildString("UTF-8").trim();
 	}
 
 	@Override

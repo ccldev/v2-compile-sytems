@@ -26,7 +26,7 @@ public class AssemblerIncludeSystem implements CompileSystem<String, Void> {
     public String compileComplete(String infos) throws ImplementationException, DebugException, IOException {
         Matcher m = ASM_PATTERN.matcher(infos);
         m.matches();
-        return "asm{" + IO.file(m.group(1)).buildString() + "};";
+        return "asm{" + IO.file(m.group(1)).buildString("UTF-8") + "};";
     }
 
     @Override
