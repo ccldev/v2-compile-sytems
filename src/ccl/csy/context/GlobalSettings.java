@@ -30,7 +30,13 @@ public class GlobalSettings {
         for(int i = 0; i < outputFiles.size(); i++){
             IOBase<?> cl0 = IO.file(outputFiles.get(i));
 
-            ArrayList<Instruction> is = InstructionReader.read(cl0.reader());
+            ArrayList<Instruction> is;
+            try{
+                is = InstructionReader.read(cl0.reader());
+            }catch (IOException e){
+                cl0 = IO.file("./" + outputFiles.get(i));
+                is = InstructionReader.read(cl0.reader());
+            }
             InstructionOptimizer.DEFAULT.optimize(optimizeVariables, change, is);
             cl0 = IO.buffer();
 
