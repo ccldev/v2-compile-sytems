@@ -30,6 +30,6 @@ public class ComplexLiteralCompiler implements RawValueCompiler {
         for(int i = 0; i < groups.length; i++){
             groups[i] = m.group(i + 1);
         }
-        return StaticValueCompiler.compileValue(String.format(result, groups));
+        return StaticValueCompiler.compileValue(String.format(result, (Object[]) groups));
     }
 }
